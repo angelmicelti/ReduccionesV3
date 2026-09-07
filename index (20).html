@@ -1342,25 +1342,11 @@
         /* Condición: departamentos didácticos (JD de DCD) = 16 h */
         .resumen-item.dcd-cond { border-left-color: #2b8a3e; }
 
-        /* Condición conjunta: OR + DD + OD + TDE = 39 h (tarjeta destacada).
-           Paleta por defecto VERDE, la misma de las condiciones que se cumplen
-           (p. ej. la tarjeta de TOTAL); solo se vuelve roja (.warn) cuando con
-           OR ≥ 11 el conjunto ≠ 39, y ámbar (.pend) mientras OR < 11 queda
-           pendiente de completar (coherente con la tarjeta "Quedan n horas"). */
+        /* Condición conjunta: OR + DD + OD + TDE = 39 h (tarjeta destacada) */
         .resumen-item.conjunto {
-            border-left-color: #2b8a3e;
-            background: #ebfbee;
+            border-left-color: #d6336c;
+            background: #fff0f6;
             grid-column: 1 / -1;
-        }
-
-        .resumen-item.conjunto.warn {
-            border-left-color: #e63946;
-            background: #ffe3e3;
-        }
-
-        .resumen-item.conjunto.pend {
-            border-left-color: #e67700;
-            background: #fff9db;
         }
 
         .resumen-desglose {
@@ -1566,42 +1552,8 @@
         .consulta-chips-empty { font-size: 0.8rem; color: #adb5bd; font-style: italic; }
         .consulta-all-btn { background: #12b886; color: white; }
         .consulta-all-btn:hover { background: #0ca678; }
-        .consulta-none-btn { background: #e8590c; color: white; }
-        .consulta-none-btn:hover { background: #d9480f; }
         .consulta-clear-btn { background: #adb5bd; color: white; }
         .consulta-clear-btn:hover { background: #868e96; }
-
-        /* Barra de exportación de la consulta (PDF / CSV / Excel) */
-        .consulta-export-bar {
-            display: none;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 12px;
-            padding-top: 12px;
-            border-top: 1px dashed #dee2e6;
-        }
-        .consulta-export-label { font-size: 0.85rem; color: #495057; font-weight: 600; margin-right: 2px; }
-        .consulta-export-btn { padding: 8px 14px; font-size: 0.8rem; }
-        .consulta-export-btn.pdf { background: #fa5252; color: white; }
-        .consulta-export-btn.pdf:hover { background: #f03e3e; }
-        .consulta-export-btn.csv { background: #1c7ed6; color: white; }
-        .consulta-export-btn.csv:hover { background: #1971c2; }
-        .consulta-export-btn.xls { background: #2f9e44; color: white; }
-        .consulta-export-btn.xls:hover { background: #2b8a3e; }
-
-        /* Vista compacta de la consulta "Sin reducciones" */
-        .consulta-none-grid { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
-        .consulta-none-item {
-            background: #fff4e6;
-            color: #d9480f;
-            border: 1px solid #ffd8a8;
-            border-radius: 999px;
-            padding: 4px 12px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-        .consulta-none-count { color: #868e96; font-size: 0.82rem; margin-top: 10px; }
 
         /* Bloques por profesor en la consulta multi */
         .consulta-prof-block {
@@ -1855,6 +1807,16 @@
         }
 
         .footer-content { max-width: 800px; margin: 0 auto; }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .footer-links a { color: var(--accent-light); text-decoration: none; transition: color 0.3s; }
+        .footer-links a:hover { color: white; }
 
         /* Notification */
         .notification {
@@ -2782,7 +2744,7 @@
                     <div class="resumen-value" id="horas-pendientes">0</div>
                     <div class="resumen-pendiente-msg" id="msg-pendientes"></div>
                 </div>
-                <div class="resumen-item conjunto" id="card-conjunto">
+                <div class="resumen-item conjunto">
                     <h3>Otras reducciones + DD + OD + TDE</h3>
                     <div class="resumen-value" id="horas-conjunto">0</div>
                     <div class="resumen-desglose" id="desglose-conjunto"></div>
@@ -2807,18 +2769,11 @@
                     <datalist id="dl-consulta-prof"></datalist>
                     <button class="dept-action-btn dept-add-btn" id="consultaProfBtn" title="Añadir este profesor/a a la consulta"><i class="fas fa-user-plus"></i> Añadir</button>
                     <button class="dept-action-btn dept-add-btn consulta-all-btn" id="consultaProfAllBtn" title="Consultar a la vez a todo el profesorado que tenga alguna reducción asignada"><i class="fas fa-users"></i> Todos con reducciones</button>
-                    <button class="dept-action-btn dept-add-btn consulta-none-btn" id="consultaProfNoneBtn" title="Consultar a la vez a todo el profesorado que NO tenga ninguna reducción asignada"><i class="fas fa-user-slash"></i> Sin reducciones</button>
                     <button class="dept-action-btn dept-add-btn consulta-clear-btn" id="consultaProfClearBtn" title="Vaciar la selección"><i class="fas fa-eraser"></i> Limpiar</button>
                 </div>
                 <div class="consulta-prof-chips" id="consultaProfChips"></div>
-                <div class="consulta-export-bar" id="consultaExportBar">
-                    <span class="consulta-export-label" id="consultaExportLabel">Exportar consulta:</span>
-                    <button class="dept-action-btn consulta-export-btn pdf" id="consultaExportPdfBtn" title="Guardar esta consulta en un archivo PDF"><i class="fas fa-file-pdf"></i> PDF</button>
-                    <button class="dept-action-btn consulta-export-btn csv" id="consultaExportCsvBtn" title="Guardar esta consulta en un archivo CSV (valores separados por ;)"><i class="fas fa-file-csv"></i> CSV</button>
-                    <button class="dept-action-btn consulta-export-btn xls" id="consultaExportXlsBtn" title="Guardar esta consulta en un archivo de Excel (.xls)"><i class="fas fa-file-excel"></i> Excel</button>
-                </div>
                 <div class="consulta-prof-results" id="consultaProfResults">
-                    <div class="consulta-prof-empty"><i class="fas fa-info-circle"></i> Consulte a un profesor/a, a dos o más a la vez (añadalos con «Añadir» o con la tecla Enter), a todo el profesorado con reducciones o al que no tenga ninguna.</div>
+                    <div class="consulta-prof-empty"><i class="fas fa-info-circle"></i> Consulte a un profesor/a, a dos o más a la vez (añadalos con «Añadir» o con la tecla Enter) o a todo el profesorado con reducciones.</div>
                 </div>
             </div>
         </div>
@@ -2828,6 +2783,11 @@
         <footer>
             <div class="footer-content">
                 <p>Sistema de Gestión de Reducciones Horarias &copy; 2025 - IES Virgen de Villadiego</p>
+                <div class="footer-links">
+                    <a href="#"><i class="fas fa-info-circle"></i> Información</a>
+                    <a href="#"><i class="fas fa-question-circle"></i> Ayuda</a>
+                    <a href="mailto:iesvirgendevilladiego@iesvilladiego.com"><i class="fas fa-envelope"></i> Contacto</a>
+                </div>
             </div>
         </footer>
     </div>
@@ -5660,7 +5620,6 @@
         var conjVal = document.getElementById('horas-conjunto');
         var conjWarn = document.getElementById('warning-conjunto');
         var conjOk = document.getElementById('ok-conjunto');
-        var conjCard = document.getElementById('card-conjunto');
         var pendCard = document.getElementById('card-pendiente');
         var pendVal = document.getElementById('horas-pendientes');
         var pendMsg = document.getElementById('msg-pendientes');
@@ -5669,21 +5628,12 @@
             if (conjOk) conjOk.style.display = 'none';
             if (conjVal) conjVal.style.color = '';
             if (pendCard) pendCard.style.display = '';
-            // Tarjeta conjunto en ÁMBAR mientras OR < 11: la condición de 39 h
-            // aún no es evaluable (no es un error, falta por asignar).
-            if (conjCard) { conjCard.classList.remove('warn'); conjCard.classList.add('pend'); }
             var quedan = 11 - horasOR;
             if (pendVal) pendVal.textContent = quedan;
             if (pendMsg) pendMsg.textContent = 'Quedan ' + quedan + (quedan === 1 ? ' hora' : ' horas') + ' de reducción sin asignar';
         } else {
             if (pendCard) pendCard.style.display = 'none';
             setCond(horasConjunto === 39, 'horas-conjunto', 'warning-conjunto', 'ok-conjunto');
-            // Verde (paleta de las condiciones cumplidas) si es 39; rojo solo
-            // cuando con OR = 11 el conjunto da distinto de 39.
-            if (conjCard) {
-                conjCard.classList.remove('pend');
-                conjCard.classList.toggle('warn', horasConjunto !== 39);
-            }
         }
     }
 
@@ -7211,44 +7161,10 @@
         return true;
     }
 
-    // Profesorado que NO tiene NINGUNA reducción asignada (req. usuario):
-    // parte del profesorado del curso y descarta todo nombre que aparezca en
-    // las MISMAS fuentes y con las MISMAS condiciones que getTeachersWithReductions.
-    function getTeachersWithoutReductions() {
-        return getAllTeachers().filter(function(n) {
-            var rows = computeTeacherReductions(n);
-            return !rows || !rows.length;
-        });
-    }
-
-    // Fuente única para PINTAR y para EXPORTAR la consulta: una entrada por
-    // profesor/a con sus filas (o ninguna), su total y el total conjunto.
-    // noneMode = todos los consultados carecen de reducciones (consulta
-    // "Sin reducciones"): se pinta en vista compacta y se exporta como lista.
-    function buildConsultaExportData() {
-        var teachers = consultaSelection.map(function(name) {
-            var rows = computeTeacherReductions(name) || [];
-            var total = rows.reduce(function(a, r) { return a + (r.horas || 0); }, 0);
-            return { name: name, rows: rows, total: total };
-        });
-        var grandTotal = teachers.reduce(function(a, t) { return a + t.total; }, 0);
-        var noneMode = teachers.length > 0 && teachers.every(function(t) { return !t.rows.length; });
-        return { teachers: teachers, grandTotal: grandTotal, noneMode: noneMode };
-    }
-
     function renderConsultaProf() {
         var box = document.getElementById('consultaProfResults');
         var chipsEl = document.getElementById('consultaProfChips');
-        var exportBar = document.getElementById('consultaExportBar');
         if (!box) return;
-
-        // Barra de exportación: solo visible con una consulta activa
-        if (exportBar) {
-            exportBar.style.display = consultaSelection.length ? 'flex' : 'none';
-            var lbl = document.getElementById('consultaExportLabel');
-            if (lbl) lbl.textContent = 'Exportar consulta (' + consultaSelection.length
-                + (consultaSelection.length === 1 ? ' profesor/a' : ' profesores/as') + '):';
-        }
 
         // Chips de la selección actual (con × para quitar a cada profesor/a)
         if (chipsEl) {
@@ -7268,255 +7184,37 @@
         }
 
         if (!consultaSelection.length) {
-            box.innerHTML = '<div class="consulta-prof-empty"><i class="fas fa-info-circle"></i> Consulte a un profesor/a, a dos o más a la vez (añadalos con «Añadir» o con la tecla Enter), a todo el profesorado con reducciones o al que no tenga ninguna.</div>';
-            return;
-        }
-
-        var ex = buildConsultaExportData();
-
-        // Vista compacta: TODOS los consultados sin ninguna reducción
-        if (ex.noneMode) {
-            box.innerHTML = '<div class="consulta-prof-block consulta-none-block">'
-                + '<div class="consulta-prof-name"><i class="fas fa-user-slash"></i> Profesorado sin ninguna reducción asignada (' + ex.teachers.length + ')</div>'
-                + '<div class="consulta-none-grid">' + ex.teachers.map(function(t) {
-                    return '<span class="consulta-none-item">' + escapeHtml(t.name) + '</span>';
-                }).join('') + '</div>'
-                + '<div class="consulta-none-count">Ninguno de ellos aparece en el equipo directivo, en jefaturas de departamento, en puestos con reducción ni en otras reducciones lectivas.</div>'
-                + '</div>';
+            box.innerHTML = '<div class="consulta-prof-empty"><i class="fas fa-info-circle"></i> Consulte a un profesor/a, a dos o más a la vez (añadalos con «Añadir» o con la tecla Enter) o a todo el profesorado con reducciones.</div>';
             return;
         }
 
         var anyRows = false;
+        var grandTotal = 0;
         var html = '';
-        ex.teachers.forEach(function(t) {
-            html += '<div class="consulta-prof-block"><div class="consulta-prof-name"><i class="fas fa-user"></i> ' + escapeHtml(t.name) + '</div>';
-            if (t.rows.length) {
+        consultaSelection.forEach(function(name) {
+            var rows = computeTeacherReductions(name);
+            var sub = 0;
+            html += '<div class="consulta-prof-block"><div class="consulta-prof-name"><i class="fas fa-user"></i> ' + escapeHtml(name) + '</div>';
+            if (rows.length) {
                 anyRows = true;
                 html += '<table class="consulta-prof-table"><thead><tr><th>Sección</th><th>Reducción / Cargo</th><th>Horas</th></tr></thead><tbody>';
-                t.rows.forEach(function(r) {
+                rows.forEach(function(r) {
+                    sub += r.horas;
                     html += '<tr><td>' + escapeHtml(r.seccion) + '</td><td>' + escapeHtml(r.detalle) + '</td><td>' + r.horas + '</td></tr>';
                 });
                 html += '</tbody></table>';
-                html += '<div class="consulta-prof-subtotal">Total: <span>' + t.total + ' h</span></div>';
+                html += '<div class="consulta-prof-subtotal">Total: <span>' + sub + ' h</span></div>';
+                grandTotal += sub;
             } else {
                 html += '<div class="consulta-prof-none">Sin reducciones asignadas.</div>';
             }
             html += '</div>';
         });
 
-        if (ex.teachers.length > 1 && anyRows) {
-            html += '<div class="consulta-prof-total">Total conjunto: <span>' + ex.grandTotal + ' h</span> de reducción para ' + ex.teachers.length + ' profesores/as</div>';
+        if (consultaSelection.length > 1 && anyRows) {
+            html += '<div class="consulta-prof-total">Total conjunto: <span>' + grandTotal + ' h</span> de reducción para ' + consultaSelection.length + ' profesores/as</div>';
         }
         box.innerHTML = html;
-    }
-
-    // =============================================
-    // EXPORTACIÓN DE LA CONSULTA (PDF / CSV / Excel)
-    // =============================================
-    // Req. usuario: las búsquedas del panel "Consulta de reducciones por
-    // profesor" deben poder exportarse a los tres formatos. Los tres se
-    // generan en el cliente (sin servicios externos) a partir de la misma
-    // fuente de datos que pinta la pantalla (buildConsultaExportData).
-    function consultaExportStamp() {
-        var d = new Date();
-        var p = function(x) { return (x < 10 ? '0' : '') + x; };
-        return '' + d.getFullYear() + p(d.getMonth() + 1) + p(d.getDate()) + '-' + p(d.getHours()) + p(d.getMinutes());
-    }
-
-    function consultaExportTitle(ex) {
-        return ex.noneMode ? 'Profesorado sin ninguna reducción asignada' : 'Consulta de reducciones por profesor/a';
-    }
-
-    function consultaGuardSelection() {
-        if (consultaSelection.length) return true;
-        showNotification('Realice primero una consulta para poder exportarla', 'info');
-        return false;
-    }
-
-    function downloadConsultaBlob(blob, filename) {
-        var link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = filename;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        setTimeout(function() { URL.revokeObjectURL(link.href); }, 4000);
-    }
-
-    function consultaFecha() {
-        return new Date().toLocaleDateString('es-ES') + ' ' + new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
-    }
-
-    // --- CSV: BOM UTF-8 + separador ';' (Excel español) + CRLF ---
-    function consultaCsvField(v) {
-        var s = String(v === undefined || v === null ? '' : v);
-        if (/[;"\r\n]/.test(s)) s = '"' + s.replace(/"/g, '""') + '"';
-        return s;
-    }
-
-    function exportConsultaCSV() {
-        if (!consultaGuardSelection()) return;
-        var ex = buildConsultaExportData();
-        var rows = [
-            [consultaExportTitle(ex)],
-            ['Curso: ' + currentCourse],
-            ['Generado: ' + consultaFecha()],
-            []
-        ];
-        if (ex.noneMode) {
-            rows.push(['Profesor/a']);
-            ex.teachers.forEach(function(t) { rows.push([t.name]); });
-            rows.push([]);
-            rows.push(['Total: ' + ex.teachers.length + (ex.teachers.length === 1 ? ' profesor/a sin ninguna reducción' : ' profesores/as sin ninguna reducción')]);
-        } else {
-            rows.push(['Profesor/a', 'Sección', 'Reducción / Cargo', 'Horas']);
-            ex.teachers.forEach(function(t) {
-                if (t.rows.length) {
-                    t.rows.forEach(function(r) {
-                        rows.push([t.name, r.seccion, r.detalle, r.horas]);
-                    });
-                } else {
-                    rows.push([t.name, '', 'Sin reducciones asignadas', 0]);
-                }
-                rows.push(['TOTAL ' + t.name, '', '', t.total]);
-            });
-            if (ex.teachers.length > 1) {
-                rows.push(['TOTAL CONJUNTO (' + ex.teachers.length + ' profesores/as)', '', '', ex.grandTotal]);
-            }
-        }
-        var csv = '\uFEFF' + rows.map(function(r) { return r.map(consultaCsvField).join(';'); }).join('\r\n');
-        downloadConsultaBlob(new Blob([csv], { type: 'text/csv;charset=utf-8' }), 'consulta_reducciones_' + consultaExportStamp() + '.csv');
-        showNotification('Consulta exportada a CSV', 'success');
-    }
-
-    // --- Excel: SpreadsheetML 2003 (.xls), generado sin dependencias externas.
-    //     Excel/LibreOffice lo abren con columnas y cabeceras con formato. ---
-    function consultaXmlEsc(s) {
-        return String(s === undefined || s === null ? '' : s)
-            .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;').replace(/'/g, '&apos;');
-    }
-
-    function exportConsultaExcel() {
-        if (!consultaGuardSelection()) return;
-        var ex = buildConsultaExportData();
-        var esc = consultaXmlEsc;
-        function cell(v, style, numeric) {
-            return '<Cell' + (style ? ' ss:StyleID="' + style + '"' : '')
-                + '><Data ss:Type="' + (numeric ? 'Number' : 'String') + '">' + esc(v) + '</Data></Cell>';
-        }
-        function row(cells) { return '<Row>' + cells.join('') + '</Row>'; }
-        var xml = '<?xml version="1.0" encoding="UTF-8"?>\n'
-            + '<?mso-application progid="Excel.Sheet"?>\n'
-            + '<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"\n'
-            + ' xmlns:o="urn:schemas-microsoft-com:office:office"\n'
-            + ' xmlns:x="urn:schemas-microsoft-com:office:excel"\n'
-            + ' xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">\n'
-            + '<Styles>'
-            + '<Style ss:ID="titulo"><Font ss:Bold="1" ss:Size="12" ss:Color="#1a365d"/></Style>'
-            + '<Style ss:ID="meta"><Font ss:Color="#495057"/></Style>'
-            + '<Style ss:ID="cab"><Font ss:Bold="1" ss:Color="#FFFFFF"/><Interior ss:Color="#2c3e50" ss:Pattern="Solid"/></Style>'
-            + '<Style ss:ID="total"><Font ss:Bold="1"/></Style>'
-            + '</Styles>\n'
-            + '<Worksheet ss:Name="Consulta reducciones">\n'
-            + '<Table>\n'
-            + '<Column ss:Width="170"/><Column ss:Width="150"/><Column ss:Width="220"/><Column ss:Width="55"/>\n';
-        xml += row([cell(consultaExportTitle(ex), 'titulo')]);
-        xml += row([cell('Curso: ' + currentCourse, 'meta')]);
-        xml += row([cell('Generado: ' + consultaFecha(), 'meta')]);
-        if (ex.noneMode) {
-            xml += row([cell('Profesor/a', 'cab')]);
-            ex.teachers.forEach(function(t) { xml += row([cell(t.name)]); });
-            xml += row([cell('Total: ' + ex.teachers.length + (ex.teachers.length === 1 ? ' profesor/a sin ninguna reducción' : ' profesores/as sin ninguna reducción'), 'total')]);
-        } else {
-            xml += row([cell('Profesor/a', 'cab'), cell('Sección', 'cab'), cell('Reducción / Cargo', 'cab'), cell('Horas', 'cab')]);
-            ex.teachers.forEach(function(t) {
-                if (t.rows.length) {
-                    t.rows.forEach(function(r) {
-                        xml += row([cell(t.name), cell(r.seccion), cell(r.detalle), cell(r.horas, null, true)]);
-                    });
-                } else {
-                    xml += row([cell(t.name), cell(''), cell('Sin reducciones asignadas'), cell(0, null, true)]);
-                }
-                xml += row([cell('TOTAL ' + t.name, 'total'), cell(''), cell(''), cell(t.total, 'total', true)]);
-            });
-            if (ex.teachers.length > 1) {
-                xml += row([cell('TOTAL CONJUNTO (' + ex.teachers.length + ' profesores/as)', 'total'), cell(''), cell(''), cell(ex.grandTotal, 'total', true)]);
-            }
-        }
-        xml += '</Table>\n</Worksheet>\n</Workbook>';
-        downloadConsultaBlob(new Blob([xml], { type: 'application/vnd.ms-excel' }), 'consulta_reducciones_' + consultaExportStamp() + '.xls');
-        showNotification('Consulta exportada a Excel', 'success');
-    }
-
-    // --- PDF: misma librería (jsPDF + autoTable) que el Informe general ---
-    function exportConsultaPDF() {
-        if (!consultaGuardSelection()) return;
-        if (!window.jspdf || !window.jspdf.jsPDF) {
-            showNotification('No se ha podido cargar el generador PDF (compruebe la conexión a internet)', 'error');
-            return;
-        }
-        var ex = buildConsultaExportData();
-        var doc = new jspdf.jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
-        var pageW = doc.internal.pageSize.getWidth();
-        var margin = 12;
-        var y = margin;
-        doc.setFontSize(14);
-        doc.setFont(undefined, 'bold');
-        doc.text(consultaExportTitle(ex), pageW / 2, y, { align: 'center' });
-        y += 6;
-        doc.setFontSize(8);
-        doc.setFont(undefined, 'normal');
-        doc.text('Curso ' + currentCourse + ' · Generado el ' + consultaFecha(), pageW / 2, y, { align: 'center' });
-        y += 6;
-
-        if (ex.noneMode) {
-            doc.setFontSize(9);
-            doc.text(ex.teachers.length + (ex.teachers.length === 1 ? ' profesor/a no aparece' : ' profesores/as no aparecen') + ' en ninguna reducción del curso:', margin, y);
-            doc.autoTable({
-                startY: y + 2,
-                head: [['Profesor/a']],
-                body: ex.teachers.map(function(t) { return [t.name]; }),
-                theme: 'grid',
-                styles: { fontSize: 9, cellPadding: 2 },
-                headStyles: { fillColor: [232, 89, 12], textColor: 255 },
-                margin: { left: margin, right: margin }
-            });
-        } else {
-            var body = [];
-            ex.teachers.forEach(function(t) {
-                if (t.rows.length) {
-                    t.rows.forEach(function(r) {
-                        body.push([t.name, r.seccion, r.detalle, String(r.horas)]);
-                    });
-                } else {
-                    body.push([t.name, '', 'Sin reducciones asignadas', '0']);
-                }
-                body.push(['TOTAL ' + t.name, '', '', String(t.total)]);
-            });
-            if (ex.teachers.length > 1) {
-                body.push(['TOTAL CONJUNTO (' + ex.teachers.length + ' profesores/as)', '', '', String(ex.grandTotal)]);
-            }
-            doc.autoTable({
-                startY: y,
-                head: [['Profesor/a', 'Sección', 'Reducción / Cargo', 'Horas']],
-                body: body,
-                theme: 'grid',
-                styles: { fontSize: 8, cellPadding: 1.6 },
-                headStyles: { fillColor: [112, 72, 232], textColor: 255 },
-                margin: { left: margin, right: margin },
-                columnStyles: { 0: { cellWidth: 48 }, 1: { cellWidth: 42 }, 3: { halign: 'center', cellWidth: 16 } },
-                didParseCell: function(hookData) {
-                    var first = String((hookData.row.raw && hookData.row.raw[0]) || '');
-                    if (first.indexOf('TOTAL') === 0) {
-                        hookData.cell.styles.fontStyle = 'bold';
-                        hookData.cell.styles.fillColor = [241, 243, 245];
-                    }
-                }
-            });
-        }
-        doc.save('consulta_reducciones_' + consultaExportStamp() + '.pdf');
-        showNotification('Consulta exportada a PDF', 'success');
     }
 
     function refreshConsultaDatalist() {
@@ -8436,22 +8134,6 @@
             consultaSelection = [];
             renderConsultaProf();
         });
-        // Todos los profesores/as que NO tengan NINGUNA reducción asignada
-        document.getElementById('consultaProfNoneBtn').addEventListener('click', function() {
-            var withoutReds = getTeachersWithoutReductions();
-            if (!withoutReds.length) {
-                showNotification('Todo el profesorado registrado tiene alguna reducción asignada', 'info');
-                return;
-            }
-            consultaSelection = withoutReds.slice();
-            renderConsultaProf();
-            showNotification('Consulta: ' + withoutReds.length + (withoutReds.length === 1 ? ' profesor/a sin ninguna reducción' : ' profesores/as sin ninguna reducción'), 'success');
-        });
-
-        // ===== Exportación de la consulta a PDF / CSV / Excel =====
-        document.getElementById('consultaExportPdfBtn').addEventListener('click', exportConsultaPDF);
-        document.getElementById('consultaExportCsvBtn').addEventListener('click', exportConsultaCSV);
-        document.getElementById('consultaExportXlsBtn').addEventListener('click', exportConsultaExcel);
 
         // Report modal (PDF)
         document.getElementById('reportBtn').addEventListener('click', function() {

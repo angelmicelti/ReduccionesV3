@@ -1342,25 +1342,11 @@
         /* Condición: departamentos didácticos (JD de DCD) = 16 h */
         .resumen-item.dcd-cond { border-left-color: #2b8a3e; }
 
-        /* Condición conjunta: OR + DD + OD + TDE = 39 h (tarjeta destacada).
-           Paleta por defecto VERDE, la misma de las condiciones que se cumplen
-           (p. ej. la tarjeta de TOTAL); solo se vuelve roja (.warn) cuando con
-           OR ≥ 11 el conjunto ≠ 39, y ámbar (.pend) mientras OR < 11 queda
-           pendiente de completar (coherente con la tarjeta "Quedan n horas"). */
+        /* Condición conjunta: Otras + Otros + DCD + TDE = 39 h (tarjeta destacada) */
         .resumen-item.conjunto {
-            border-left-color: #2b8a3e;
-            background: #ebfbee;
+            border-left-color: #d6336c;
+            background: #fff0f6;
             grid-column: 1 / -1;
-        }
-
-        .resumen-item.conjunto.warn {
-            border-left-color: #e63946;
-            background: #ffe3e3;
-        }
-
-        .resumen-item.conjunto.pend {
-            border-left-color: #e67700;
-            background: #fff9db;
         }
 
         .resumen-desglose {
@@ -1368,111 +1354,6 @@
             color: #868e96;
             margin-top: 6px;
             line-height: 1.5;
-        }
-
-        /* Task 18: OD = 9 · DD + OD = 25 · OR ≤ 11 · horas pendientes de asignar */
-        .resumen-item.otros-cond { border-left-color: #1c7ed6; }
-        .resumen-item.ddod-cond { border-left-color: #4c6ef5; }
-        .resumen-item.or-cond { border-left-color: #f76707; }
-
-        /* Tarjeta "Quedan n horas de reducción sin asignar" (aparece si OR < 11) */
-        .resumen-item.pendiente {
-            border-left-color: #e67700;
-            background: #fff9db;
-            grid-column: 1 / -1;
-        }
-        .resumen-item.pendiente .resumen-value { color: #e67700; }
-        .resumen-pendiente-msg {
-            color: #e67700;
-            font-weight: 600;
-            font-size: 0.95rem;
-            margin-top: 5px;
-        }
-
-        /* ===== Barra de estado global de los criterios numéricos ===== */
-        .resumen-status {
-            max-width: 960px;
-            margin: -14px auto 22px;
-            padding: 14px 18px;
-            border-radius: 10px;
-            border-left: 6px solid #adb5bd;
-            background: white;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-        .resumen-status.ok   { border-left-color: #2b8a3e; background: #ebfbee; }
-        .resumen-status.warn { border-left-color: #e67700; background: #fff9db; }
-        .resumen-status.bad  { border-left-color: #c92a2a; background: #fff5f5; }
-        .resumen-status-main {
-            font-size: 1.05rem;
-            font-weight: 700;
-            color: #343a40;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .resumen-status.ok .resumen-status-main   { color: #2b8a3e; }
-        .resumen-status.warn .resumen-status-main { color: #e67700; }
-        .resumen-status.bad .resumen-status-main  { color: #c92a2a; }
-        .resumen-status-list {
-            margin-top: 8px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-        }
-        .resumen-status-list:empty { display: none; }
-        .resumen-incidencia {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            border: 1px solid transparent;
-            border-radius: 999px;
-            padding: 4px 12px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.12s ease, box-shadow 0.12s ease;
-        }
-        .resumen-incidencia:hover { transform: translateY(-1px); box-shadow: 0 3px 8px rgba(0,0,0,0.12); }
-        .resumen-incidencia.incid-bad {
-            background: #ffe3e3; color: #c92a2a; border-color: #ffc9c9;
-        }
-        .resumen-incidencia.incid-warn {
-            background: #ffe8cc; color: #d9480f; border-color: #ffd8a8;
-        }
-        .resumen-incidencia i { font-size: 0.8rem; }
-
-        /* Acciones bajo el título del Resumen general (copiar) */
-        .resumen-actions {
-            max-width: 960px;
-            margin: 0 auto 16px;
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-        }
-        .resumen-action-btn {
-            border: none;
-            border-radius: 8px;
-            padding: 8px 14px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            background: #2c3e50;
-            color: white;
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-            transition: background 0.15s ease;
-        }
-        .resumen-action-btn:hover { background: #1a252f; }
-
-        /* Resaltado temporal de la sección a la que se salta desde una incidencia */
-        @keyframes sectionFlash {
-            0%, 100% { box-shadow: none; }
-            25%, 65% { box-shadow: 0 0 0 4px rgba(15, 108, 189, 0.55); }
-        }
-        .section-flash {
-            animation: sectionFlash 0.9s ease-in-out 2;
-            border-radius: 12px;
         }
 
         /* ===== CONSULTA PERSONAL POR PROFESOR (pantalla Resumen general) ===== */
@@ -1546,75 +1427,6 @@
         .consulta-prof-total { margin-top: 12px; font-size: 0.95rem; color: #495057; }
 
         .consulta-prof-total span { font-weight: 700; font-size: 1.15rem; color: #2b8a3e; }
-
-        /* Chips de la selección multi-profesor */
-        .consulta-prof-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
-        .consulta-prof-chips:empty { display: none; }
-        .consulta-chip {
-            display: inline-flex; align-items: center; gap: 6px;
-            background: #e7f5ff; color: #1864ab;
-            border: 1px solid #74c0fc; border-radius: 999px;
-            padding: 3px 6px 3px 11px; font-size: 0.82rem; font-weight: 600;
-        }
-        .consulta-chip-x {
-            border: none; background: rgba(24, 100, 171, 0.12); color: #1864ab;
-            width: 18px; height: 18px; border-radius: 50%; cursor: pointer;
-            font-size: 0.62rem; display: inline-flex; align-items: center; justify-content: center;
-            padding: 0;
-        }
-        .consulta-chip-x:hover { background: #fa5252; color: white; }
-        .consulta-chips-empty { font-size: 0.8rem; color: #adb5bd; font-style: italic; }
-        .consulta-all-btn { background: #12b886; color: white; }
-        .consulta-all-btn:hover { background: #0ca678; }
-        .consulta-none-btn { background: #e8590c; color: white; }
-        .consulta-none-btn:hover { background: #d9480f; }
-        .consulta-clear-btn { background: #adb5bd; color: white; }
-        .consulta-clear-btn:hover { background: #868e96; }
-
-        /* Barra de exportación de la consulta (PDF / CSV / Excel) */
-        .consulta-export-bar {
-            display: none;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 12px;
-            padding-top: 12px;
-            border-top: 1px dashed #dee2e6;
-        }
-        .consulta-export-label { font-size: 0.85rem; color: #495057; font-weight: 600; margin-right: 2px; }
-        .consulta-export-btn { padding: 8px 14px; font-size: 0.8rem; }
-        .consulta-export-btn.pdf { background: #fa5252; color: white; }
-        .consulta-export-btn.pdf:hover { background: #f03e3e; }
-        .consulta-export-btn.csv { background: #1c7ed6; color: white; }
-        .consulta-export-btn.csv:hover { background: #1971c2; }
-        .consulta-export-btn.xls { background: #2f9e44; color: white; }
-        .consulta-export-btn.xls:hover { background: #2b8a3e; }
-
-        /* Vista compacta de la consulta "Sin reducciones" */
-        .consulta-none-grid { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
-        .consulta-none-item {
-            background: #fff4e6;
-            color: #d9480f;
-            border: 1px solid #ffd8a8;
-            border-radius: 999px;
-            padding: 4px 12px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-        .consulta-none-count { color: #868e96; font-size: 0.82rem; margin-top: 10px; }
-
-        /* Bloques por profesor en la consulta multi */
-        .consulta-prof-block {
-            border: 1px solid #e9ecef; border-radius: 10px;
-            padding: 12px 14px 12px; margin-bottom: 12px; background: #fdfdfe;
-        }
-        .consulta-prof-name {
-            font-weight: 700; color: #1a365d; font-size: 0.95rem; margin-bottom: 8px;
-        }
-        .consulta-prof-name i { color: #7048e8; margin-right: 4px; }
-        .consulta-prof-none { color: #868e96; font-size: 0.85rem; font-style: italic; }
-        .consulta-prof-subtotal { margin-top: 8px; font-size: 0.88rem; color: #495057; text-align: right; }
-        .consulta-prof-subtotal span { font-weight: 700; font-size: 1.05rem; color: #2b8a3e; }
 
         /* ===== BOLSA DE FUNCIONES CON REDUCCIÓN LECTIVA ASIGNADA ===== */
         /* Banda a ancho completo en la fila inferior de "Otras reducciones lectivas" */
@@ -1855,6 +1667,16 @@
         }
 
         .footer-content { max-width: 800px; margin: 0 auto; }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .footer-links a { color: var(--accent-light); text-decoration: none; transition: color 0.3s; }
+        .footer-links a:hover { color: white; }
 
         /* Notification */
         .notification {
@@ -2176,56 +1998,6 @@
         }
 
         .section-title i { margin-right: 10px; vertical-align: -0.125em; }
-
-        /* ===== BADGE DE HORAS JUNTO AL NOMBRE DE CADA SECCIÓN =====
-           Muestra el nº de horas máximo de la sección (suma de sus tarjetas)
-           y el estado de las horas asignadas a profesorado:
-           .ok  verde → asignadas = máximo · .bad rojo → asignadas < máximo
-           (con la diferencia entre paréntesis) · .zero gris → sin horas. */
-        .section-hours-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            margin-left: 12px;
-            padding: 5px 12px;
-            border-radius: 999px;
-            font-size: 0.72rem;
-            font-weight: 700;
-            letter-spacing: 0.3px;
-            vertical-align: middle;
-            white-space: nowrap;
-        }
-
-        .section-hours-badge i { font-size: 0.85rem; }
-
-        .section-hours-badge.ok {
-            background: #d3f9d8;
-            color: #2b8a3e;
-            border: 1px solid #8ce99a;
-        }
-
-        .section-hours-badge.bad {
-            background: #ffe3e3;
-            color: #c92a2a;
-            border: 1px solid #ffa8a8;
-        }
-
-        /* Exceso de asignación: hay más horas asignadas de las que ofrecen las tarjetas */
-        .section-hours-badge.over {
-            background: #fff4e6;
-            color: #e8590c;
-            border: 1px solid #ffc078;
-        }
-
-        .section-hours-badge.zero {
-            background: #e9ecef;
-            color: #868e96;
-            border: 1px solid #dee2e6;
-        }
-
-        @media (max-width: 720px) {
-            .section-hours-badge { font-size: 0.64rem; margin-left: 8px; padding: 4px 9px; }
-        }
 
         .section-header .section-add-btn {
             grid-column: 3;
@@ -2657,7 +2429,7 @@
 
         <!-- Equipo Directivo -->
         <div class="equipo-directivo" id="equipoDirectivoSection">
-            <h2 class="directivo-title"><i class="fas fa-users"></i> EQUIPO DIRECTIVO<span class="section-hours-badge zero" id="hoursBadge-directivo"></span></h2>
+            <h2 class="directivo-title"><i class="fas fa-users"></i> EQUIPO DIRECTIVO</h2>
             <div class="directivo-card">
                 <div class="directivo-header">
                     <h3><i class="fas fa-user-tie"></i> Distribución de horas de reducción</h3>
@@ -2671,7 +2443,7 @@
         <!-- Departamentos de Coordinación Didáctica -->
         <div class="section-container" id="dcdSection">
             <div class="section-header">
-                <h2 class="section-title"><i class="fas fa-layer-group"></i> DEPARTAMENTOS DE COORDINACIÓN DIDÁCTICA<span class="section-hours-badge zero" id="hoursBadge-dcd"></span></h2>
+                <h2 class="section-title"><i class="fas fa-layer-group"></i> DEPARTAMENTOS DE COORDINACIÓN DIDÁCTICA</h2>
                 <button class="dept-action-btn dept-add-btn section-add-btn" id="addDcdDeptBtn"><i class="fas fa-plus"></i> Añadir departamento</button>
             </div>
             <div class="areas-container" id="dcdGrid">
@@ -2682,7 +2454,7 @@
         <!-- Otros Departamentos -->
         <div class="section-container" id="otrosDptosSection">
             <div class="section-header">
-                <h2 class="section-title"><i class="fas fa-sitemap"></i> OTROS DEPARTAMENTOS<span class="section-hours-badge zero" id="hoursBadge-otros"></span></h2>
+                <h2 class="section-title"><i class="fas fa-sitemap"></i> OTROS DEPARTAMENTOS</h2>
                 <button class="dept-action-btn dept-add-btn section-add-btn" id="addOtrosDeptBtn"><i class="fas fa-plus"></i> Añadir departamento</button>
             </div>
             <div class="areas-container" id="otrosDptosGrid">
@@ -2706,14 +2478,6 @@
         <div class="resumen-screen" id="resumenScreen" style="display:none;">
         <div class="resumen-general">
             <h2 class="resumen-title"><i class="fas fa-chart-bar"></i> RESUMEN GENERAL</h2>
-            <!-- Estado global de los criterios numéricos + incidencias navegables -->
-            <div class="resumen-status" id="criteriosStatus">
-                <div class="resumen-status-main" id="criteriosStatusMain"></div>
-                <div class="resumen-status-list" id="criteriosStatusList"></div>
-            </div>
-            <div class="resumen-actions">
-                <button class="resumen-action-btn" id="copiarResumenBtn" title="Copiar el resumen completo (criterios, secciones y total) al portapapeles para pegarlo en un correo o en mensajería"><i class="fas fa-copy"></i> Copiar resumen</button>
-            </div>
             <div class="resumen-grid">
                 <div class="resumen-item directivo">
                     <h3>Equipo directivo</h3>
@@ -2726,34 +2490,13 @@
                     </div>
                 </div>
                 <div class="resumen-item dcd-cond">
-                    <h3>Departamentos didácticos (DD)</h3>
+                    <h3>Departamentos didácticos</h3>
                     <div class="resumen-value" id="horas-dcd">0</div>
                     <div class="resumen-warning" id="warning-dcd">
                         <i class="fas fa-exclamation-triangle"></i> Deben ser 16 horas
                     </div>
                     <div class="resumen-ok" id="ok-dcd">
                         <i class="fas fa-check-circle"></i> Cumple la condición (16 h)
-                    </div>
-                </div>
-                <div class="resumen-item otros-cond">
-                    <h3>Otros departamentos (OD)</h3>
-                    <div class="resumen-value" id="horas-od">0</div>
-                    <div class="resumen-warning" id="warning-od">
-                        <i class="fas fa-exclamation-triangle"></i> Deben ser 9 horas
-                    </div>
-                    <div class="resumen-ok" id="ok-od">
-                        <i class="fas fa-check-circle"></i> Cumple la condición (9 h)
-                    </div>
-                </div>
-                <div class="resumen-item ddod-cond">
-                    <h3>DD + OD (departamentos)</h3>
-                    <div class="resumen-value" id="horas-ddod">0</div>
-                    <div class="resumen-desglose">Didácticos + Otros departamentos</div>
-                    <div class="resumen-warning" id="warning-ddod">
-                        <i class="fas fa-exclamation-triangle"></i> Deben ser 25 horas
-                    </div>
-                    <div class="resumen-ok" id="ok-ddod">
-                        <i class="fas fa-check-circle"></i> Cumple la condición (25 h)
                     </div>
                 </div>
                 <div class="resumen-item ensenanza-digital">
@@ -2766,28 +2509,12 @@
                         <i class="fas fa-check-circle"></i> Cumple la condición (5 h)
                     </div>
                 </div>
-                <div class="resumen-item or-cond">
-                    <h3>Otras reducciones (OR)</h3>
-                    <div class="resumen-value" id="horas-or">0</div>
-                    <div class="resumen-desglose" id="desglose-or"></div>
-                    <div class="resumen-warning" id="warning-or">
-                        <i class="fas fa-exclamation-triangle"></i> Supera el máximo de 11 horas
-                    </div>
-                    <div class="resumen-ok" id="ok-or">
-                        <i class="fas fa-check-circle"></i> Dentro del máximo (11 h)
-                    </div>
-                </div>
-                <div class="resumen-item pendiente" id="card-pendiente" style="display:none;">
-                    <h3>Reducción pendiente de asignar</h3>
-                    <div class="resumen-value" id="horas-pendientes">0</div>
-                    <div class="resumen-pendiente-msg" id="msg-pendientes"></div>
-                </div>
-                <div class="resumen-item conjunto" id="card-conjunto">
-                    <h3>Otras reducciones + DD + OD + TDE</h3>
+                <div class="resumen-item conjunto">
+                    <h3>Otras reducciones + Otros departamentos + DCD + TDE</h3>
                     <div class="resumen-value" id="horas-conjunto">0</div>
                     <div class="resumen-desglose" id="desglose-conjunto"></div>
                     <div class="resumen-warning" id="warning-conjunto">
-                        <i class="fas fa-exclamation-triangle"></i> Deben ser 39 horas (con OR = 11)
+                        <i class="fas fa-exclamation-triangle"></i> Deben ser 39 horas
                     </div>
                     <div class="resumen-ok" id="ok-conjunto">
                         <i class="fas fa-check-circle"></i> Cumple la condición (39 h)
@@ -2805,20 +2532,10 @@
                 <div class="consulta-prof-controls">
                     <input type="text" id="consultaProfInput" list="dl-consulta-prof" placeholder="Escriba o seleccione el nombre del profesorado..." autocomplete="off">
                     <datalist id="dl-consulta-prof"></datalist>
-                    <button class="dept-action-btn dept-add-btn" id="consultaProfBtn" title="Añadir este profesor/a a la consulta"><i class="fas fa-user-plus"></i> Añadir</button>
-                    <button class="dept-action-btn dept-add-btn consulta-all-btn" id="consultaProfAllBtn" title="Consultar a la vez a todo el profesorado que tenga alguna reducción asignada"><i class="fas fa-users"></i> Todos con reducciones</button>
-                    <button class="dept-action-btn dept-add-btn consulta-none-btn" id="consultaProfNoneBtn" title="Consultar a la vez a todo el profesorado que NO tenga ninguna reducción asignada"><i class="fas fa-user-slash"></i> Sin reducciones</button>
-                    <button class="dept-action-btn dept-add-btn consulta-clear-btn" id="consultaProfClearBtn" title="Vaciar la selección"><i class="fas fa-eraser"></i> Limpiar</button>
-                </div>
-                <div class="consulta-prof-chips" id="consultaProfChips"></div>
-                <div class="consulta-export-bar" id="consultaExportBar">
-                    <span class="consulta-export-label" id="consultaExportLabel">Exportar consulta:</span>
-                    <button class="dept-action-btn consulta-export-btn pdf" id="consultaExportPdfBtn" title="Guardar esta consulta en un archivo PDF"><i class="fas fa-file-pdf"></i> PDF</button>
-                    <button class="dept-action-btn consulta-export-btn csv" id="consultaExportCsvBtn" title="Guardar esta consulta en un archivo CSV (valores separados por ;)"><i class="fas fa-file-csv"></i> CSV</button>
-                    <button class="dept-action-btn consulta-export-btn xls" id="consultaExportXlsBtn" title="Guardar esta consulta en un archivo de Excel (.xls)"><i class="fas fa-file-excel"></i> Excel</button>
+                    <button class="dept-action-btn dept-add-btn" id="consultaProfBtn"><i class="fas fa-search"></i> Consultar</button>
                 </div>
                 <div class="consulta-prof-results" id="consultaProfResults">
-                    <div class="consulta-prof-empty"><i class="fas fa-info-circle"></i> Consulte a un profesor/a, a dos o más a la vez (añadalos con «Añadir» o con la tecla Enter), a todo el profesorado con reducciones o al que no tenga ninguna.</div>
+                    <div class="consulta-prof-empty"><i class="fas fa-info-circle"></i> Escriba o seleccione un profesor/a para consultar sus horas de reducción a título personal.</div>
                 </div>
             </div>
         </div>
@@ -2828,6 +2545,11 @@
         <footer>
             <div class="footer-content">
                 <p>Sistema de Gestión de Reducciones Horarias &copy; 2025 - IES Virgen de Villadiego</p>
+                <div class="footer-links">
+                    <a href="#"><i class="fas fa-info-circle"></i> Información</a>
+                    <a href="#"><i class="fas fa-question-circle"></i> Ayuda</a>
+                    <a href="mailto:iesvirgendevilladiego@iesvilladiego.com"><i class="fas fa-envelope"></i> Contacto</a>
+                </div>
             </div>
         </footer>
     </div>
@@ -3253,25 +2975,6 @@
                 cat: o.cat
             };
         });
-    }
-
-    // =============================================
-    // TARJETAS TDE / ESCUELA 4.0 — identificación POR NOMBRE (req. usuario)
-    // =============================================
-    // Las tarjetas por defecto (id 'tde'/'escuela40', cat 'ed') y las creadas
-    // por el usuario ("Coordinación TDE", "TDE", "Coordinación Escuela 4.0",
-    // "Escuela 4.0", etc. — que nacen con cat 'pdc') deben computar igual en
-    // el bloque "TDE + Escuela 4.0" del Resumen general (total esperado: 5 h).
-    function isTdeCard(r) {
-        return !!r && (r.id === 'tde' || /tde/i.test(String(r.name || '')));
-    }
-
-    function isEscuela40Card(r) {
-        return !!r && (r.id === 'escuela40' || /escuela\s*4\s*[.,]?\s*0/i.test(String(r.name || '')));
-    }
-
-    function isEnsenanzaDigitalCard(r) {
-        return (r && r.cat === 'ed') || isTdeCard(r) || isEscuela40Card(r);
     }
 
     function buildDefaultDcd() {
@@ -4277,12 +3980,8 @@
             // "Guardando..." forever. The SDK keeps retrying in background;
             // when the write finally lands, its echo snapshot flips the
             // indicator back to "Guardado".
-            // Escritura COMPLETA (sin merge): el objeto contiene el documento
-            // entero, y así los campos residuales del formato antiguo que
-            // pudiera haber en el doc (p. ej. las áreas 'artistico' con
-            // departamentos ya eliminados) se eliminan de la nube al guardar.
             await Promise.race([
-                db.collection(COL_CURSOS).doc(currentCourse).set(saveObj),
+                db.collection(COL_CURSOS).doc(currentCourse).set(saveObj, { merge: true }),
                 new Promise(function(_, reject) {
                     setTimeout(function() { reject(new Error('save-timeout')); }, 12000);
                 })
@@ -4622,9 +4321,8 @@
                 var ok = await saveToFirebaseSilent();
                 showNotification(ok ? 'Restauración completada: curso ' + target + ' recuperado y sincronizado' : 'Restauración aplicada en este dispositivo; se sincronizará con la nube al reconectar', ok ? 'success' : 'info');
             } else {
-                // Curso NO abierto en este dispositivo: escritura completa al doc
-                // de la nube (sin merge, para limpiar campos residuales legacy)
-                // + espejo en localStorage (por si se abre sin conexión).
+                // Curso NO abierto en este dispositivo: escritura directa al doc
+                // de la nube + espejo en localStorage (por si se abre sin conexión).
                 var nowIso = new Date().toISOString();
                 await db.collection(COL_CURSOS).doc(target).set({
                     equipoDirectivo: clean.equipoDirectivo,
@@ -4632,7 +4330,7 @@
                     lastModified: nowIso,
                     version: '2.0',
                     _app: APP_TAG
-                });
+                }, { merge: true });
                 var localStr = JSON.stringify({ equipoDirectivo: clean.equipoDirectivo, data: clean.data });
                 localStorage.setItem('reduccionesData_' + target, localStr);
                 localStorage.setItem('reduccionesData_' + target + '_ts', nowIso);
@@ -4910,7 +4608,6 @@
         renderOtrasReducciones();
         renderProfesorado();
         updateAllDatalists();
-        updateSectionHoursBadges();
     }
 
     function renderDirectivo() {
@@ -5151,7 +4848,7 @@
         const isAdmin = currentUser && currentUser.role === 'admin';
         const disabled = isAdmin ? '' : ' disabled';
 
-        let html = '<h2 class="orientacion-title"><i class="fas fa-graduation-cap"></i> Departamento de Orientación<span class="section-hours-badge zero" id="hoursBadge-orientacion"></span></h2>';
+        let html = '<h2 class="orientacion-title"><i class="fas fa-graduation-cap"></i> Departamento de Orientación</h2>';
         html += '<div class="orientacion-card">';
         html += '<div class="department-list"><div class="department-content">';
         html += '<table><colgroup><col>' + (isAdmin ? '<col style="width:44px"><col style="width:44px"><col style="width:52px"><col style="width:30px">' : '<col style="width:44px"><col style="width:44px"><col style="width:52px">') + '</colgroup><thead><tr>';
@@ -5276,7 +4973,7 @@
         const disabled = isAdmin ? '' : ' disabled';
 
         let html = '<div class="section-header">';
-        html += '<h2 class="section-title"><i class="fas fa-list-alt"></i> OTRAS REDUCCIONES LECTIVAS<span class="section-hours-badge zero" id="hoursBadge-otras"></span></h2>';
+        html += '<h2 class="section-title"><i class="fas fa-list-alt"></i> OTRAS REDUCCIONES LECTIVAS</h2>';
         if (isAdmin) {
             html += '<button class="dept-action-btn dept-add-btn section-add-btn" id="addOtraRedBtn"><i class="fas fa-plus"></i> Añadir reducción</button>';
         }
@@ -5350,8 +5047,8 @@
                 html += '</tr>';
                 html += '</tbody></table></div>';
             }
-            if (isAdmin && !isEnsenanzaDigitalCard(r)) {
-                // TDE y Escuela 4.0 (por defecto o por nombre) no se pueden enviar a la bolsa (req. usuario)
+            if (isAdmin && r.cat !== 'ed') {
+                // TDE y Escuela 4.0 (cat 'ed') no se pueden enviar a la bolsa (req. usuario)
                 html += '<button class="card-bolsa-btn" data-otra-bolsa="' + escapeAttr(r.id) + '"><i class="fas fa-inbox"></i> Enviar a la bolsa</button>';
             }
             html += '<div class="summary-card"><h3>Resumen de Reducciones</h3>';
@@ -5499,74 +5196,46 @@
         }
     }
 
-    // =============================================
-    // CÁLCULO CENTRALIZADO DEL RESUMEN GENERAL
-    // =============================================
-    // Fuente única de verdad de todos los valores del Resumen general.
-    // La usan: la propia pantalla (calculateResumenGeneral), la barra de
-    // estado global de los criterios, el texto que se copia al portapapeles
-    // y la tabla de criterios del Informe PDF.
-    function computeResumenData() {
+    function calculateResumenGeneral() {
         // Horas del equipo directivo (solo contar si hay nombre asignado)
         function getDirHours(role) {
             return (equipoDirectivo[role].name && equipoDirectivo[role].name.trim()) ? equipoDirectivo[role].hours : 0;
         }
-        var directivo = getDirHours('director') + getDirHours('jefatura') + getDirHours('secretaria');
+        const horasDirectivo = getDirHours('director') + getDirHours('jefatura') + getDirHours('secretaria');
 
         // --- Condición 2: departamentos didácticos (JD de DCD: 2h por jefatura) ---
-        var dcd = 0;
+        var horasDcd = 0;
         (data.dcd || []).forEach(function(dep) {
             (dep.professors || []).forEach(function(prof) {
-                if (prof.jd) dcd += 2;
+                if (prof.jd) horasDcd += 2;
             });
         });
 
         // JD de Orientación (cuenta en el total global, no en las 4 condiciones)
-        var oriJd = 0;
+        var horasOriJd = 0;
         (data.orientacion || []).forEach(function(prof) {
-            if (prof.jd) oriJd += 2;
+            if (prof.jd) horasOriJd += 2;
         });
 
         // Reducciones de puestos en Otros departamentos
-        var otros = 0;
+        var horasOtros = 0;
         (data.otrosDptos || []).forEach(function(dep) {
             (dep.puestos || []).forEach(function(p) {
-                if (p.reduccion) otros += (parseInt(p.horas, 10) || 0);
+                if (p.reduccion) horasOtros += (parseInt(p.horas, 10) || 0);
             });
         });
 
         // --- Otras reducciones lectivas ---
-        // Req. usuario: TDE y Escuela 4.0 se reconocen POR NOMBRE de la tarjeta
-        // ("Coordinación TDE", "TDE", "Coordinación Escuela 4.0", "Escuela 4.0"
-        // y similares), tanto si son las tarjetas por defecto como si fueron
-        // creadas a mano (cat 'pdc'). Así el bloque "TDE + Escuela 4.0" muestra
-        // las horas reales de esas tarjetas (esperado: 5).
-        var tde = 0, otrasPdc = 0, ed = 0;
+        // TDE se identifica por su id por defecto 'tde' o por nombre (tarjetas propias)
+        function isTde(r) { return r.id === 'tde' || /tde/i.test(r.name || ''); }
+        var horasTde = 0, horasOtrasPdc = 0, horasEd = 0;
         (data.otrasReducciones || []).forEach(function(r) {
             var h = parseInt(r.horas, 10) || 0;
-            if (isEnsenanzaDigitalCard(r)) {
-                ed += h;                       // TDE + Escuela 4.0 (condición 3)
-                if (isTdeCard(r)) tde += h;    // solo TDE (para la condición 4)
+            if (r.cat === 'ed') {
+                horasEd += h;                       // TDE + Escuela 4.0 (condición 3)
+                if (isTde(r)) horasTde += h;        // solo TDE (para la condición 4)
             } else {
-                otrasPdc += h;                 // resto de "Otras reducciones lectivas"
-            }
-        });
-
-        // --- OR (req. usuario Task 18): horas ASIGNADAS de "Otras reducciones
-        // lectivas" excluyendo las tarjetas TDE (la TDE entra aparte en la
-        // fórmula OR + DD + OD + TDE). Mismo criterio de "asignada" que los
-        // badges de sección (computeSectionHours): función activada →
-        // min(nº de profesores, horas); resto → las horas de la tarjeta si
-        // tiene responsable. Con los datos reales del centro OR = 11.
-        var or = 0;
-        (data.otrasReducciones || []).forEach(function(r) {
-            if (isTdeCard(r)) return;
-            var h = parseInt(r.horas, 10) || 0;
-            if (r.funcion) {
-                var profs = Array.isArray(r.profesores) ? r.profesores : [];
-                or += Math.min(profs.length, h);
-            } else if (r.responsable && r.responsable.trim()) {
-                or += h;
+                horasOtrasPdc += h;                 // resto de "Otras reducciones lectivas"
             }
         });
 
@@ -5575,55 +5244,35 @@
         // "Otras reducciones lectivas" (data.otrasReducciones, incluidas las funciones
         // ya activadas, que viven ahí con funcion: true y cat 'pdc').
 
-        // --- Condiciones de la pantalla "Resumen general" (req. usuario Task 18) ---
-        // DD (didácticos) = 16 siempre · OD (otros) = 9 siempre · DD + OD = 25
-        // · OR (asignadas de "Otras reducciones", sin TDE) ≤ 11
-        // · Si OR = 11 → OR + DD + OD + TDE = 39
-        // · Si OR < 11 → tarjeta "Quedan n horas de reducción sin asignar" (n = 11 − OR)
-        var conjunto = or + dcd + otros + tde;
+        // --- Condiciones de la pantalla "Resumen general" (req. usuario) ---
+        // C1: equipo directivo = 24 · C2: departamentos didácticos = 16
+        // C3: TDE + Escuela 4.0 = 5 · C4: Otras + Otros + DCD + TDE = 39
+        // (cada componente se suma UNA sola vez: la Escuela 4.0 no entra en la C4 y
+        //  las horas de la bolsa no contabilizan hasta que se activa la función)
+        var horasConjunto = horasOtrasPdc + horasOtros + horasDcd + horasTde;
 
         // Total global informativo (todo lo anterior + Orientación + Escuela 4.0;
         // las horas de la bolsa no contabilizan)
-        var total = directivo + dcd + oriJd + otros + otrasPdc + ed;
-
-        return {
-            directivo: directivo, dcd: dcd, oriJd: oriJd, otros: otros,
-            tde: tde, ed: ed, otrasPdc: otrasPdc, or: or,
-            conjunto: conjunto, total: total
-        };
-    }
-
-    function calculateResumenGeneral() {
-        var v = computeResumenData();
+        const totalHoras = horasDirectivo + horasDcd + horasOriJd + horasOtros + horasOtrasPdc + horasEd;
 
         // Update DOM
-        document.getElementById('horas-directivo').textContent = v.directivo;
-        document.getElementById('horas-dcd').textContent = v.dcd;
-        document.getElementById('horas-od').textContent = v.otros;
-        document.getElementById('horas-ddod').textContent = v.dcd + v.otros;
-        document.getElementById('horas-tde-e40').textContent = v.ed;
-        document.getElementById('horas-or').textContent = v.or;
-        document.getElementById('desglose-or').textContent = 'Asignadas: ' + v.or + ' de 11 h';
-        document.getElementById('horas-conjunto').textContent = v.conjunto;
+        document.getElementById('horas-directivo').textContent = horasDirectivo;
+        document.getElementById('horas-dcd').textContent = horasDcd;
+        document.getElementById('horas-tde-e40').textContent = horasEd;
+        document.getElementById('horas-conjunto').textContent = horasConjunto;
         document.getElementById('desglose-conjunto').textContent =
-            'Otras reducciones (sin TDE): ' + v.or + ' h · Departamentos didácticos: ' + v.dcd +
-            ' h · Otros departamentos: ' + v.otros + ' h · TDE: ' + v.tde + ' h';
-        document.getElementById('total-horas').textContent = v.total;
+            'Otras reducciones lectivas: ' + horasOtrasPdc + ' h · Otros departamentos: ' + horasOtros +
+            ' h · Departamentos de coordinación didáctica: ' + horasDcd + ' h · TDE: ' + horasTde + ' h';
+        document.getElementById('total-horas').textContent = totalHoras;
 
-        // Validate (condiciones del Resumen general)
-        validateHours(v.directivo, v.dcd, v.otros, v.ed, v.or, v.conjunto);
-
-        // Badge de horas máximas/asignadas junto al nombre de cada sección
-        updateSectionHoursBadges();
-
-        // Barra de estado global de los criterios numéricos (con incidencias navegables)
-        updateCriteriosStatus(v);
+        // Validate (4 condiciones)
+        validateHours(horasDirectivo, horasDcd, horasEd, horasConjunto);
     }
 
-    function validateHours(horasDirectivo, horasDcd, horasOtros, horasEd, horasOR, horasConjunto) {
-        // Condiciones definidas por el usuario (Task 18) para la pantalla
-        // "Resumen general". Cada tarjeta muestra el aviso en rojo cuando no
-        // se cumple y la confirmación en verde cuando se cumple.
+    function validateHours(horasDirectivo, horasDcd, horasEd, horasConjunto) {
+        // Condiciones definidas por el usuario para mostrar/validar la información
+        // de la pantalla "Resumen general". Cada tarjeta muestra el aviso en rojo
+        // cuando no se cumple y la confirmación en verde cuando se cumple.
         function setCond(ok, valId, warnId, okId) {
             var valEl = document.getElementById(valId);
             var warnEl = document.getElementById(warnId);
@@ -5641,336 +5290,9 @@
         }
 
         setCond(horasDirectivo === 24, 'horas-directivo', 'warning-directivo', 'ok-directivo');
-        // DD: los departamentos didácticos deben ser siempre 16 h
         setCond(horasDcd === 16, 'horas-dcd', 'warning-dcd', 'ok-dcd');
-        // OD: los otros departamentos deben ser siempre 9 h
-        setCond(horasOtros === 9, 'horas-od', 'warning-od', 'ok-od');
-        // DD + OD = 25 siempre
-        setCond(horasDcd + horasOtros === 25, 'horas-ddod', 'warning-ddod', 'ok-ddod');
-        // TDE + Escuela 4.0 = 5
         setCond(horasEd === 5, 'horas-tde-e40', 'warning-tde-e40', 'ok-tde-e40');
-        // OR: no puede superar las 11 h disponibles
-        setCond(horasOR <= 11, 'horas-or', 'warning-or', 'ok-or');
-
-        // Conjunto OR + DD + OD + TDE: la condición de 39 h solo aplica cuando
-        // OR = 11 (req. usuario). Con OR < 11 NO se marca como error: aparece
-        // la tarjeta "Quedan n horas de reducción sin asignar" (n = 11 − OR) y
-        // el valor del conjunto queda en color neutro. Con OR > 11 la tarjeta
-        // OR ya está en rojo y el conjunto (≠ 39) también se marca.
-        var conjVal = document.getElementById('horas-conjunto');
-        var conjWarn = document.getElementById('warning-conjunto');
-        var conjOk = document.getElementById('ok-conjunto');
-        var conjCard = document.getElementById('card-conjunto');
-        var pendCard = document.getElementById('card-pendiente');
-        var pendVal = document.getElementById('horas-pendientes');
-        var pendMsg = document.getElementById('msg-pendientes');
-        if (horasOR < 11) {
-            if (conjWarn) conjWarn.style.display = 'none';
-            if (conjOk) conjOk.style.display = 'none';
-            if (conjVal) conjVal.style.color = '';
-            if (pendCard) pendCard.style.display = '';
-            // Tarjeta conjunto en ÁMBAR mientras OR < 11: la condición de 39 h
-            // aún no es evaluable (no es un error, falta por asignar).
-            if (conjCard) { conjCard.classList.remove('warn'); conjCard.classList.add('pend'); }
-            var quedan = 11 - horasOR;
-            if (pendVal) pendVal.textContent = quedan;
-            if (pendMsg) pendMsg.textContent = 'Quedan ' + quedan + (quedan === 1 ? ' hora' : ' horas') + ' de reducción sin asignar';
-        } else {
-            if (pendCard) pendCard.style.display = 'none';
-            setCond(horasConjunto === 39, 'horas-conjunto', 'warning-conjunto', 'ok-conjunto');
-            // Verde (paleta de las condiciones cumplidas) si es 39; rojo solo
-            // cuando con OR = 11 el conjunto da distinto de 39.
-            if (conjCard) {
-                conjCard.classList.remove('pend');
-                conjCard.classList.toggle('warn', horasConjunto !== 39);
-            }
-        }
-    }
-
-    // =============================================
-    // HORAS MÁXIMAS Y ASIGNADAS DE CADA SECCIÓN (badge junto al título)
-    // =============================================
-    // Req. usuario: junto al nombre de cada sección se muestra el número de
-    // horas MÁXIMO de dicha sección (la suma de las horas de cada tarjeta) y
-    // un indicador del estado de las horas asignadas a profesorado:
-    //  - Verde (ok): asignadas = máximo, todas las horas de las tarjetas
-    //    tienen profesor/a asociado.
-    //  - Rojo (bad): asignadas < máximo, mostrando entre paréntesis la
-    //    diferencia entre las asignadas y las disponibles (p. ej. "(−6 h)").
-    // Las funciones de la BOLSA no contabilizan: solo suman sus tarjetas al
-    // activarse y pasar a "Otras reducciones lectivas".
-    function computeSectionHours() {
-        // EQUIPO DIRECTIVO: cada cargo es una tarjeta con sus horas; están
-        // asignadas cuando el cargo tiene profesor/a con nombre.
-        var dirMax = 0, dirAssigned = 0;
-        ['director', 'jefatura', 'secretaria'].forEach(function(k) {
-            var d = equipoDirectivo ? equipoDirectivo[k] : null;
-            if (!d) return;
-            var h = parseInt(d.hours, 10) || 0;
-            if (h <= 0) return;
-            dirMax += h;
-            if (d.name && d.name.trim()) dirAssigned += h;
-        });
-
-        // DCD: cada tarjeta (departamento) suma 2 h por cada Jefatura de
-        // Departamento marcada; asignadas cuando esa jefatura tiene nombre.
-        var dcdMax = 0, dcdAssigned = 0;
-        (data.dcd || []).forEach(function(dep) {
-            (dep.professors || []).forEach(function(p) {
-                if (p.jd) {
-                    dcdMax += 2;
-                    if (p.name && p.name.trim()) dcdAssigned += 2;
-                }
-            });
-        });
-
-        // OTROS DEPARTAMENTOS: tarjeta = departamento; suma los puestos con
-        // "Red." marcada y sus horas; asignadas cuando el puesto tiene responsable.
-        var otrosMax = 0, otrosAssigned = 0;
-        (data.otrosDptos || []).forEach(function(dep) {
-            (dep.puestos || []).forEach(function(p) {
-                if (p.reduccion) {
-                    var h = parseInt(p.horas, 10) || 0;
-                    otrosMax += h;
-                    if (p.responsable && p.responsable.trim()) otrosAssigned += h;
-                }
-            });
-        });
-
-        // OTRAS REDUCCIONES LECTIVAS: tarjeta = cada reducción (incluye TDE,
-        // Escuela 4.0 y las funciones ya activadas). Función activada: 1 h por
-        // cada profesor asignado, limitado a las horas de la tarjeta.
-        var otrasMax = 0, otrasAssigned = 0;
-        (data.otrasReducciones || []).forEach(function(r) {
-            var h = parseInt(r.horas, 10) || 0;
-            otrasMax += h;
-            if (r.funcion) {
-                var profs = Array.isArray(r.profesores) ? r.profesores : [];
-                otrasAssigned += Math.min(profs.length, h);
-            } else if (r.responsable && r.responsable.trim()) {
-                otrasAssigned += h;
-            }
-        });
-
-        // ORIENTACIÓN: la jefatura marcada (radio) supone 2 h; asignada cuando tiene nombre.
-        var oriMax = 0, oriAssigned = 0;
-        (data.orientacion || []).forEach(function(p) {
-            if (p.jd) {
-                oriMax += 2;
-                if (p.name && p.name.trim()) oriAssigned += 2;
-            }
-        });
-
-        return {
-            directivo:   { max: dirMax,   assigned: dirAssigned   },
-            dcd:         { max: dcdMax,   assigned: dcdAssigned   },
-            otros:       { max: otrosMax, assigned: otrosAssigned },
-            otras:       { max: otrasMax, assigned: otrasAssigned },
-            orientacion: { max: oriMax,   assigned: oriAssigned   }
-        };
-    }
-
-    // Pinta los badges de las 5 secciones junto a su nombre. Se llama desde
-    // renderAll(), calculateResumenGeneral() (vía recalculateAll) y desde los
-    // handlers de escritura de nombres que no repintan la sección completa.
-    function updateSectionHoursBadges() {
-        var s = computeSectionHours();
-        function paint(id, info) {
-            var el = document.getElementById(id);
-            if (!el) return;
-            var max = info.max, asig = info.assigned;
-            el.classList.remove('ok', 'bad', 'zero', 'over');
-            if (max <= 0) {
-                el.classList.add('zero');
-                el.innerHTML = '<i class="fas fa-hourglass-half"></i> 0 h';
-                el.title = 'Esta sección todavía no tiene horas configuradas en sus tarjetas.';
-            } else if (asig === max) {
-                el.classList.add('ok');
-                el.innerHTML = '<i class="fas fa-check-circle"></i> ' + max + '/' + max + ' h';
-                el.title = 'Correcto: las ' + max + ' h de las tarjetas de la sección están asignadas a profesorado.';
-            } else if (asig < max) {
-                el.classList.add('bad');
-                var difTxt = '\u2212' + (max - asig);
-                el.innerHTML = '<i class="fas fa-exclamation-circle"></i> ' + asig + '/' + max + ' h (' + difTxt + ' h)';
-                el.title = 'Incorrecto: las tarjetas de la sección suman ' + max + ' h y hay ' + asig + ' h asignadas a profesorado (' + (max - asig) + ' h sin asignar).';
-            } else {
-                // Exceso de asignación: hay más horas asignadas a profesorado
-                // que las que ofrecen las tarjetas de la sección.
-                el.classList.add('over');
-                var exceso = asig - max;
-                el.innerHTML = '<i class="fas fa-arrow-circle-up"></i> ' + asig + '/' + max + ' h (+' + exceso + ' h)';
-                el.title = 'Exceso: hay ' + asig + ' h asignadas a profesorado pero las tarjetas de la sección solo suman ' + max + ' h (' + exceso + ' h de más).';
-            }
-        }
-        paint('hoursBadge-directivo', s.directivo);
-        paint('hoursBadge-dcd', s.dcd);
-        paint('hoursBadge-otros', s.otros);
-        paint('hoursBadge-otras', s.otras);
-        paint('hoursBadge-orientacion', s.orientacion);
-    }
-
-    // Refresco combinado de los indicadores de horas (badges de sección +
-    // barra de estado de los criterios) para las rutas de edición que NO
-    // pasan por recalculateAll(), como teclear el nombre de una jefatura en
-    // DCD u Orientación (el input conserva el foco mientras se teclea).
-    function updateHoursIndicators() {
-        updateSectionHoursBadges();
-        updateCriteriosStatus(computeResumenData());
-    }
-
-    // =============================================
-    // BARRA DE ESTADO GLOBAL DE LOS CRITERIOS NUMÉRICOS
-    // =============================================
-    // Síntesis visual de las 7 condiciones del Resumen general más los
-    // déficits/excesos de las 5 secciones. Cada incidencia es un chip clicable
-    // que lleva a la sección del dashboard donde se corrige (el salto lo
-    // resuelve goToSection, definido en el bootstrap junto a showDashboard()).
-    function getCriteriosEstado(v) {
-        // Los 7 criterios con su estado y la sección donde se corrigen
-        var list = [
-            { label: 'Equipo directivo: ' + v.directivo + ' de 24 h',  ok: v.directivo === 24, section: 'equipoDirectivoSection' },
-            { label: 'DD (didácticos): ' + v.dcd + ' de 16 h',         ok: v.dcd === 16,       section: 'dcdSection' },
-            { label: 'OD (otros dptos): ' + v.otros + ' de 9 h',       ok: v.otros === 9,      section: 'otrosDptosSection' },
-            { label: 'DD + OD: ' + (v.dcd + v.otros) + ' de 25 h',     ok: (v.dcd + v.otros) === 25, section: 'dcdSection' },
-            { label: 'TDE + Escuela 4.0: ' + v.ed + ' de 5 h',         ok: v.ed === 5,         section: 'otrasReduccionesSection' },
-            { label: 'OR: ' + v.or + ' de máx. 11 h',                  ok: v.or <= 11,         section: 'otrasReduccionesSection' }
-        ];
-        // Conjunto: solo evaluable como "39" cuando OR = 11. Con OR < 11 no es
-        // un error: queda pendiente hasta completar las 11 h (tarjeta ámbar).
-        if (v.or >= 11) {
-            list.push({ label: 'OR + DD + OD + TDE: ' + v.conjunto + ' de 39 h', ok: v.conjunto === 39, section: 'otrasReduccionesSection' });
-        } else {
-            list.push({ label: 'OR + DD + OD + TDE: ' + v.conjunto + ' h (pendiente de completar OR hasta 11 h)', ok: true, pending: true, section: 'otrasReduccionesSection' });
-        }
-        return list;
-    }
-
-    // Pinta la barra de estado global (encima del grid del Resumen general).
-    // Se llama desde calculateResumenGeneral(), por lo que se actualiza en
-    // todas las rutas de recálculo y edición.
-    function updateCriteriosStatus(v) {
-        var box = document.getElementById('criteriosStatus');
-        var main = document.getElementById('criteriosStatusMain');
-        var listEl = document.getElementById('criteriosStatusList');
-        if (!box || !main || !listEl) return;
-
-        var criterios = getCriteriosEstado(v);
-        var fallidos = criterios.filter(function(c) { return !c.ok; });
-        var quedan = Math.max(0, 11 - v.or);
-
-        // Déficits y excesos por sección (mismo criterio que los badges)
-        var secs = computeSectionHours();
-        var secMeta = [
-            { id: 'equipoDirectivoSection',     name: 'Equipo Directivo',       info: secs.directivo },
-            { id: 'dcdSection',                 name: 'Departamentos didácticos', info: secs.dcd },
-            { id: 'otrosDptosSection',          name: 'Otros Departamentos',    info: secs.otros },
-            { id: 'otrasReduccionesSection',    name: 'Otras reducciones',      info: secs.otras },
-            { id: 'orientacionSection',         name: 'Orientación',            info: secs.orientacion }
-        ];
-
-        var html = '';
-        secMeta.forEach(function(s) {
-            if (s.info.max <= 0) return;
-            var dif = s.info.assigned - s.info.max;
-            if (dif < 0) {
-                html += '<button type="button" class="resumen-incidencia incid-bad" data-section="' + s.id + '" title="Clic para ir a la sección y completar la asignación">'
-                     +  '<i class="fas fa-arrow-right"></i> ' + s.name + ': faltan ' + Math.abs(dif) + ' h sin asignar</button>';
-            } else if (dif > 0) {
-                html += '<button type="button" class="resumen-incidencia incid-warn" data-section="' + s.id + '" title="Clic para ir a la sección">'
-                     +  '<i class="fas fa-arrow-right"></i> ' + s.name + ': ' + dif + ' h de exceso</button>';
-            }
-        });
-        fallidos.forEach(function(c) {
-            html += '<button type="button" class="resumen-incidencia incid-bad" data-section="' + c.section + '" title="Clic para ir a la sección y corregirlo">'
-                 +  '<i class="fas fa-arrow-right"></i> ' + c.label + '</button>';
-        });
-
-        if (fallidos.length > 0) {
-            box.classList.remove('ok', 'warn');
-            box.classList.add('bad');
-            main.innerHTML = '<i class="fas fa-times-circle"></i> ' + fallidos.length + ' de ' + criterios.length + ' criterios incumplidos';
-        } else if (quedan > 0) {
-            box.classList.remove('ok', 'bad');
-            box.classList.add('warn');
-            main.innerHTML = '<i class="fas fa-hourglass-half"></i> Criterios correctos · quedan ' + quedan + (quedan === 1 ? ' hora' : ' horas') + ' de reducción sin asignar';
-        } else {
-            box.classList.remove('warn', 'bad');
-            box.classList.add('ok');
-            main.innerHTML = '<i class="fas fa-check-circle"></i> Los ' + criterios.length + ' criterios numéricos se cumplen';
-        }
-        listEl.innerHTML = html;
-    }
-
-    // =============================================
-    // COPIAR EL RESUMEN AL PORTAPAPELES
-    // =============================================
-    // Texto plano con criterios, estado de las secciones y total, listo para
-    // pegar en un correo o en mensajería. Usa la MISMA fuente de datos que la
-    // pantalla (computeResumenData + computeSectionHours).
-    function buildResumenText() {
-        var v = computeResumenData();
-        var L = [];
-        L.push('RESUMEN GENERAL DE REDUCCIONES \u2014 Curso ' + currentCourse);
-        L.push('Generado el ' + new Date().toLocaleDateString('es-ES') + ' a las ' + new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' }));
-        L.push('');
-        L.push('CRITERIOS NUMÉRICOS');
-        getCriteriosEstado(v).forEach(function(c) {
-            if (c.pending) L.push('\u2022 ' + c.label);
-            else if (c.ok) L.push('\u2714 ' + c.label + ' \u2014 cumple');
-            else L.push('\u2718 ' + c.label + ' \u2014 NO cumple');
-        });
-        if (v.or < 11) {
-            var quedan = 11 - v.or;
-            L.push('\u2022 Quedan ' + quedan + (quedan === 1 ? ' hora' : ' horas') + ' de reducción sin asignar');
-        }
-        L.push('');
-        L.push('SECCIONES (asignadas / máximo)');
-        var secs = computeSectionHours();
-        var secMeta = [
-            { name: 'Equipo Directivo',          info: secs.directivo },
-            { name: 'Departamentos didácticos',  info: secs.dcd },
-            { name: 'Otros Departamentos',       info: secs.otros },
-            { name: 'Otras reducciones',         info: secs.otras },
-            { name: 'Orientación',               info: secs.orientacion }
-        ];
-        secMeta.forEach(function(s) {
-            if (s.info.max <= 0) { L.push('\u2022 ' + s.name + ': 0 h'); return; }
-            var dif = s.info.assigned - s.info.max;
-            var mark = dif === 0 ? '\u2714' : (dif < 0 ? '\u2718' : '\u25B2');
-            var extra = dif < 0 ? ' (faltan ' + Math.abs(dif) + ' h)' : (dif > 0 ? ' (' + dif + ' h de exceso)' : '');
-            L.push(mark + ' ' + s.name + ': ' + s.info.assigned + '/' + s.info.max + ' h' + extra);
-        });
-        L.push('');
-        L.push('TOTAL HORAS DE REDUCCIÓN: ' + v.total + ' h');
-        return L.join('\n');
-    }
-
-    function copiarResumenAlPortapapeles() {
-        var txt = buildResumenText();
-        function ok() { showNotification('Resumen copiado al portapapeles', 'success'); }
-        function fallback() {
-            try {
-                var ta = document.createElement('textarea');
-                ta.value = txt;
-                ta.setAttribute('readonly', '');
-                ta.style.position = 'fixed';
-                ta.style.opacity = '0';
-                document.body.appendChild(ta);
-                ta.focus();
-                ta.select();
-                document.execCommand('copy');
-                document.body.removeChild(ta);
-                ok();
-            } catch (e) {
-                console.error('No se pudo copiar el resumen:', e);
-                showNotification('No se pudo copiar el resumen automáticamente', 'error');
-            }
-        }
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(txt).then(ok, fallback);
-        } else {
-            fallback();
-        }
+        setCond(horasConjunto === 39, 'horas-conjunto', 'warning-conjunto', 'ok-conjunto');
     }
 
     // =============================================
@@ -6045,11 +5367,6 @@
 
                 // Update all datalists for this department so used names disappear from other rows
                 updateAllDatalistsForDept(deptId);
-
-                // Escribir el nombre de una jefatura cambia las horas asignadas
-                // de la sección → refrescar su badge y la barra de criterios
-                // sin repintar la tarjeta (el input conserva el foco).
-                updateHoursIndicators();
             }
         });
 
@@ -6152,9 +5469,6 @@
                 const index = parseInt(target.dataset.orientacionIndex);
                 data.orientacion[index].name = target.value;
                 debouncedFirebaseSave();
-                // El nombre de la jefatura de Orientación cambia las horas
-                // asignadas de la sección → refrescar badge y barra en vivo.
-                updateHoursIndicators();
             }
         });
 
@@ -7135,388 +6449,28 @@
         return rows;
     }
 
-    // =============================================
-    // CONSULTA DE REDUCCIONES POR PROFESOR (multi-selección)
-    // =============================================
-    // Req. usuario: la consulta debe admitir UN profesor, DOS O MÁS a la vez
-    // (añadidos como chips) o TODOS los que tienen alguna reducción asignada.
-    var consultaSelection = [];
-
-    function resolveTeacherQuery(q) {
-        // Resolución tolerante del nombre tecleado: coincidencia exacta →
-        // primer profesor cuyo nombre contenga el texto → null si nada.
-        var s = String(q || '').trim().toLowerCase();
-        if (!s) return null;
-        var teachers = getAllTeachers();
-        for (var i = 0; i < teachers.length; i++) {
-            if (String(teachers[i]).trim().toLowerCase() === s) return teachers[i];
-        }
-        for (var j = 0; j < teachers.length; j++) {
-            if (String(teachers[j]).trim().toLowerCase().indexOf(s) !== -1) return teachers[j];
-        }
-        return null;
-    }
-
-    // Todo el profesorado con AL MENOS una reducción asignada, escaneando las
-    // mismas fuentes que computeTeacherReductions (con sus mismas condiciones),
-    // de modo que cada nombre devuelto tiene garantizada al menos una fila.
-    function getTeachersWithReductions() {
-        var found = {};
-        var names = [];
-        function add(name) {
-            var k = String(name || '').trim();
-            if (!k) return;
-            var key = k.toLowerCase();
-            if (!found[key]) { found[key] = k; names.push(k); }
-        }
-        var dirRoles = ['director', 'jefatura', 'secretaria'];
-        dirRoles.forEach(function(role) {
-            var d = equipoDirectivo ? equipoDirectivo[role] : null;
-            if (d && d.name && (parseInt(d.hours, 10) || 0) > 0) add(d.name);
-        });
-        (data.dcd || []).forEach(function(dep) {
-            (dep.professors || []).forEach(function(p) {
-                if (p.jd && p.name) add(p.name);
-            });
-        });
-        (data.orientacion || []).forEach(function(p) {
-            if (p.jd && p.name) add(p.name);
-        });
-        (data.otrosDptos || []).forEach(function(dep) {
-            (dep.puestos || []).forEach(function(p) {
-                if (p.reduccion && p.responsable && (parseInt(p.horas, 10) || 0) > 0) add(p.responsable);
-            });
-        });
-        (data.otrasReducciones || []).forEach(function(r) {
-            if (r.funcion) {
-                (r.profesores || []).forEach(add);
-            } else if (r.responsable && (parseInt(r.horas, 10) || 0) > 0) {
-                add(r.responsable);
-            }
-        });
-        return names.sort(function(a, b) { return a.localeCompare(b, 'es'); });
-    }
-
-    function addTeacherToSelection(q) {
-        var name = resolveTeacherQuery(q);
-        if (!name) {
-            showNotification('No se ha encontrado ningún profesor/a con ese nombre', 'error');
-            return false;
-        }
-        if (consultaSelection.indexOf(name) !== -1) {
-            showNotification(name + ' ya está en la consulta', 'info');
-            return false;
-        }
-        consultaSelection.push(name);
-        return true;
-    }
-
-    // Profesorado que NO tiene NINGUNA reducción asignada (req. usuario):
-    // parte del profesorado del curso y descarta todo nombre que aparezca en
-    // las MISMAS fuentes y con las MISMAS condiciones que getTeachersWithReductions.
-    function getTeachersWithoutReductions() {
-        return getAllTeachers().filter(function(n) {
-            var rows = computeTeacherReductions(n);
-            return !rows || !rows.length;
-        });
-    }
-
-    // Fuente única para PINTAR y para EXPORTAR la consulta: una entrada por
-    // profesor/a con sus filas (o ninguna), su total y el total conjunto.
-    // noneMode = todos los consultados carecen de reducciones (consulta
-    // "Sin reducciones"): se pinta en vista compacta y se exporta como lista.
-    function buildConsultaExportData() {
-        var teachers = consultaSelection.map(function(name) {
-            var rows = computeTeacherReductions(name) || [];
-            var total = rows.reduce(function(a, r) { return a + (r.horas || 0); }, 0);
-            return { name: name, rows: rows, total: total };
-        });
-        var grandTotal = teachers.reduce(function(a, t) { return a + t.total; }, 0);
-        var noneMode = teachers.length > 0 && teachers.every(function(t) { return !t.rows.length; });
-        return { teachers: teachers, grandTotal: grandTotal, noneMode: noneMode };
-    }
-
-    function renderConsultaProf() {
+    function renderConsultaProf(name) {
         var box = document.getElementById('consultaProfResults');
-        var chipsEl = document.getElementById('consultaProfChips');
-        var exportBar = document.getElementById('consultaExportBar');
         if (!box) return;
-
-        // Barra de exportación: solo visible con una consulta activa
-        if (exportBar) {
-            exportBar.style.display = consultaSelection.length ? 'flex' : 'none';
-            var lbl = document.getElementById('consultaExportLabel');
-            if (lbl) lbl.textContent = 'Exportar consulta (' + consultaSelection.length
-                + (consultaSelection.length === 1 ? ' profesor/a' : ' profesores/as') + '):';
-        }
-
-        // Chips de la selección actual (con × para quitar a cada profesor/a)
-        if (chipsEl) {
-            chipsEl.innerHTML = consultaSelection.length
-                ? consultaSelection.map(function(n) {
-                    return '<span class="consulta-chip">' + escapeHtml(n)
-                        + '<button class="consulta-chip-x" data-chip-name="' + escapeAttr(n) + '" title="Quitar de la consulta"><i class="fas fa-times"></i></button></span>';
-                }).join('')
-                : '';
-            Array.prototype.forEach.call(chipsEl.querySelectorAll('.consulta-chip-x'), function(btn) {
-                btn.addEventListener('click', function() {
-                    var n = btn.getAttribute('data-chip-name');
-                    consultaSelection = consultaSelection.filter(function(x) { return x !== n; });
-                    renderConsultaProf();
-                });
-            });
-        }
-
-        if (!consultaSelection.length) {
-            box.innerHTML = '<div class="consulta-prof-empty"><i class="fas fa-info-circle"></i> Consulte a un profesor/a, a dos o más a la vez (añadalos con «Añadir» o con la tecla Enter), a todo el profesorado con reducciones o al que no tenga ninguna.</div>';
+        var q = String(name || '').trim();
+        if (!q) {
+            box.innerHTML = '<div class="consulta-prof-empty"><i class="fas fa-info-circle"></i> Escriba o seleccione un profesor/a para consultar sus horas de reducción a título personal.</div>';
             return;
         }
-
-        var ex = buildConsultaExportData();
-
-        // Vista compacta: TODOS los consultados sin ninguna reducción
-        if (ex.noneMode) {
-            box.innerHTML = '<div class="consulta-prof-block consulta-none-block">'
-                + '<div class="consulta-prof-name"><i class="fas fa-user-slash"></i> Profesorado sin ninguna reducción asignada (' + ex.teachers.length + ')</div>'
-                + '<div class="consulta-none-grid">' + ex.teachers.map(function(t) {
-                    return '<span class="consulta-none-item">' + escapeHtml(t.name) + '</span>';
-                }).join('') + '</div>'
-                + '<div class="consulta-none-count">Ninguno de ellos aparece en el equipo directivo, en jefaturas de departamento, en puestos con reducción ni en otras reducciones lectivas.</div>'
-                + '</div>';
+        var rows = computeTeacherReductions(q);
+        if (!rows || rows.length === 0) {
+            box.innerHTML = '<div class="consulta-prof-empty"><i class="fas fa-search"></i> No se han encontrado reducciones asignadas para <b>' + escapeHtml(q) + '</b>.</div>';
             return;
         }
-
-        var anyRows = false;
-        var html = '';
-        ex.teachers.forEach(function(t) {
-            html += '<div class="consulta-prof-block"><div class="consulta-prof-name"><i class="fas fa-user"></i> ' + escapeHtml(t.name) + '</div>';
-            if (t.rows.length) {
-                anyRows = true;
-                html += '<table class="consulta-prof-table"><thead><tr><th>Sección</th><th>Reducción / Cargo</th><th>Horas</th></tr></thead><tbody>';
-                t.rows.forEach(function(r) {
-                    html += '<tr><td>' + escapeHtml(r.seccion) + '</td><td>' + escapeHtml(r.detalle) + '</td><td>' + r.horas + '</td></tr>';
-                });
-                html += '</tbody></table>';
-                html += '<div class="consulta-prof-subtotal">Total: <span>' + t.total + ' h</span></div>';
-            } else {
-                html += '<div class="consulta-prof-none">Sin reducciones asignadas.</div>';
-            }
-            html += '</div>';
+        var total = 0;
+        var html = '<table class="consulta-prof-table"><thead><tr><th>Sección</th><th>Reducción / Cargo</th><th>Horas</th></tr></thead><tbody>';
+        rows.forEach(function(r) {
+            total += r.horas;
+            html += '<tr><td>' + escapeHtml(r.seccion) + '</td><td>' + escapeHtml(r.detalle) + '</td><td>' + r.horas + '</td></tr>';
         });
-
-        if (ex.teachers.length > 1 && anyRows) {
-            html += '<div class="consulta-prof-total">Total conjunto: <span>' + ex.grandTotal + ' h</span> de reducción para ' + ex.teachers.length + ' profesores/as</div>';
-        }
+        html += '</tbody></table>';
+        html += '<div class="consulta-prof-total">Total: <span>' + total + ' h</span> de reducción para <b>' + escapeHtml(q) + '</b></div>';
         box.innerHTML = html;
-    }
-
-    // =============================================
-    // EXPORTACIÓN DE LA CONSULTA (PDF / CSV / Excel)
-    // =============================================
-    // Req. usuario: las búsquedas del panel "Consulta de reducciones por
-    // profesor" deben poder exportarse a los tres formatos. Los tres se
-    // generan en el cliente (sin servicios externos) a partir de la misma
-    // fuente de datos que pinta la pantalla (buildConsultaExportData).
-    function consultaExportStamp() {
-        var d = new Date();
-        var p = function(x) { return (x < 10 ? '0' : '') + x; };
-        return '' + d.getFullYear() + p(d.getMonth() + 1) + p(d.getDate()) + '-' + p(d.getHours()) + p(d.getMinutes());
-    }
-
-    function consultaExportTitle(ex) {
-        return ex.noneMode ? 'Profesorado sin ninguna reducción asignada' : 'Consulta de reducciones por profesor/a';
-    }
-
-    function consultaGuardSelection() {
-        if (consultaSelection.length) return true;
-        showNotification('Realice primero una consulta para poder exportarla', 'info');
-        return false;
-    }
-
-    function downloadConsultaBlob(blob, filename) {
-        var link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = filename;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        setTimeout(function() { URL.revokeObjectURL(link.href); }, 4000);
-    }
-
-    function consultaFecha() {
-        return new Date().toLocaleDateString('es-ES') + ' ' + new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
-    }
-
-    // --- CSV: BOM UTF-8 + separador ';' (Excel español) + CRLF ---
-    function consultaCsvField(v) {
-        var s = String(v === undefined || v === null ? '' : v);
-        if (/[;"\r\n]/.test(s)) s = '"' + s.replace(/"/g, '""') + '"';
-        return s;
-    }
-
-    function exportConsultaCSV() {
-        if (!consultaGuardSelection()) return;
-        var ex = buildConsultaExportData();
-        var rows = [
-            [consultaExportTitle(ex)],
-            ['Curso: ' + currentCourse],
-            ['Generado: ' + consultaFecha()],
-            []
-        ];
-        if (ex.noneMode) {
-            rows.push(['Profesor/a']);
-            ex.teachers.forEach(function(t) { rows.push([t.name]); });
-            rows.push([]);
-            rows.push(['Total: ' + ex.teachers.length + (ex.teachers.length === 1 ? ' profesor/a sin ninguna reducción' : ' profesores/as sin ninguna reducción')]);
-        } else {
-            rows.push(['Profesor/a', 'Sección', 'Reducción / Cargo', 'Horas']);
-            ex.teachers.forEach(function(t) {
-                if (t.rows.length) {
-                    t.rows.forEach(function(r) {
-                        rows.push([t.name, r.seccion, r.detalle, r.horas]);
-                    });
-                } else {
-                    rows.push([t.name, '', 'Sin reducciones asignadas', 0]);
-                }
-                rows.push(['TOTAL ' + t.name, '', '', t.total]);
-            });
-            if (ex.teachers.length > 1) {
-                rows.push(['TOTAL CONJUNTO (' + ex.teachers.length + ' profesores/as)', '', '', ex.grandTotal]);
-            }
-        }
-        var csv = '\uFEFF' + rows.map(function(r) { return r.map(consultaCsvField).join(';'); }).join('\r\n');
-        downloadConsultaBlob(new Blob([csv], { type: 'text/csv;charset=utf-8' }), 'consulta_reducciones_' + consultaExportStamp() + '.csv');
-        showNotification('Consulta exportada a CSV', 'success');
-    }
-
-    // --- Excel: SpreadsheetML 2003 (.xls), generado sin dependencias externas.
-    //     Excel/LibreOffice lo abren con columnas y cabeceras con formato. ---
-    function consultaXmlEsc(s) {
-        return String(s === undefined || s === null ? '' : s)
-            .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;').replace(/'/g, '&apos;');
-    }
-
-    function exportConsultaExcel() {
-        if (!consultaGuardSelection()) return;
-        var ex = buildConsultaExportData();
-        var esc = consultaXmlEsc;
-        function cell(v, style, numeric) {
-            return '<Cell' + (style ? ' ss:StyleID="' + style + '"' : '')
-                + '><Data ss:Type="' + (numeric ? 'Number' : 'String') + '">' + esc(v) + '</Data></Cell>';
-        }
-        function row(cells) { return '<Row>' + cells.join('') + '</Row>'; }
-        var xml = '<?xml version="1.0" encoding="UTF-8"?>\n'
-            + '<?mso-application progid="Excel.Sheet"?>\n'
-            + '<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"\n'
-            + ' xmlns:o="urn:schemas-microsoft-com:office:office"\n'
-            + ' xmlns:x="urn:schemas-microsoft-com:office:excel"\n'
-            + ' xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">\n'
-            + '<Styles>'
-            + '<Style ss:ID="titulo"><Font ss:Bold="1" ss:Size="12" ss:Color="#1a365d"/></Style>'
-            + '<Style ss:ID="meta"><Font ss:Color="#495057"/></Style>'
-            + '<Style ss:ID="cab"><Font ss:Bold="1" ss:Color="#FFFFFF"/><Interior ss:Color="#2c3e50" ss:Pattern="Solid"/></Style>'
-            + '<Style ss:ID="total"><Font ss:Bold="1"/></Style>'
-            + '</Styles>\n'
-            + '<Worksheet ss:Name="Consulta reducciones">\n'
-            + '<Table>\n'
-            + '<Column ss:Width="170"/><Column ss:Width="150"/><Column ss:Width="220"/><Column ss:Width="55"/>\n';
-        xml += row([cell(consultaExportTitle(ex), 'titulo')]);
-        xml += row([cell('Curso: ' + currentCourse, 'meta')]);
-        xml += row([cell('Generado: ' + consultaFecha(), 'meta')]);
-        if (ex.noneMode) {
-            xml += row([cell('Profesor/a', 'cab')]);
-            ex.teachers.forEach(function(t) { xml += row([cell(t.name)]); });
-            xml += row([cell('Total: ' + ex.teachers.length + (ex.teachers.length === 1 ? ' profesor/a sin ninguna reducción' : ' profesores/as sin ninguna reducción'), 'total')]);
-        } else {
-            xml += row([cell('Profesor/a', 'cab'), cell('Sección', 'cab'), cell('Reducción / Cargo', 'cab'), cell('Horas', 'cab')]);
-            ex.teachers.forEach(function(t) {
-                if (t.rows.length) {
-                    t.rows.forEach(function(r) {
-                        xml += row([cell(t.name), cell(r.seccion), cell(r.detalle), cell(r.horas, null, true)]);
-                    });
-                } else {
-                    xml += row([cell(t.name), cell(''), cell('Sin reducciones asignadas'), cell(0, null, true)]);
-                }
-                xml += row([cell('TOTAL ' + t.name, 'total'), cell(''), cell(''), cell(t.total, 'total', true)]);
-            });
-            if (ex.teachers.length > 1) {
-                xml += row([cell('TOTAL CONJUNTO (' + ex.teachers.length + ' profesores/as)', 'total'), cell(''), cell(''), cell(ex.grandTotal, 'total', true)]);
-            }
-        }
-        xml += '</Table>\n</Worksheet>\n</Workbook>';
-        downloadConsultaBlob(new Blob([xml], { type: 'application/vnd.ms-excel' }), 'consulta_reducciones_' + consultaExportStamp() + '.xls');
-        showNotification('Consulta exportada a Excel', 'success');
-    }
-
-    // --- PDF: misma librería (jsPDF + autoTable) que el Informe general ---
-    function exportConsultaPDF() {
-        if (!consultaGuardSelection()) return;
-        if (!window.jspdf || !window.jspdf.jsPDF) {
-            showNotification('No se ha podido cargar el generador PDF (compruebe la conexión a internet)', 'error');
-            return;
-        }
-        var ex = buildConsultaExportData();
-        var doc = new jspdf.jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
-        var pageW = doc.internal.pageSize.getWidth();
-        var margin = 12;
-        var y = margin;
-        doc.setFontSize(14);
-        doc.setFont(undefined, 'bold');
-        doc.text(consultaExportTitle(ex), pageW / 2, y, { align: 'center' });
-        y += 6;
-        doc.setFontSize(8);
-        doc.setFont(undefined, 'normal');
-        doc.text('Curso ' + currentCourse + ' · Generado el ' + consultaFecha(), pageW / 2, y, { align: 'center' });
-        y += 6;
-
-        if (ex.noneMode) {
-            doc.setFontSize(9);
-            doc.text(ex.teachers.length + (ex.teachers.length === 1 ? ' profesor/a no aparece' : ' profesores/as no aparecen') + ' en ninguna reducción del curso:', margin, y);
-            doc.autoTable({
-                startY: y + 2,
-                head: [['Profesor/a']],
-                body: ex.teachers.map(function(t) { return [t.name]; }),
-                theme: 'grid',
-                styles: { fontSize: 9, cellPadding: 2 },
-                headStyles: { fillColor: [232, 89, 12], textColor: 255 },
-                margin: { left: margin, right: margin }
-            });
-        } else {
-            var body = [];
-            ex.teachers.forEach(function(t) {
-                if (t.rows.length) {
-                    t.rows.forEach(function(r) {
-                        body.push([t.name, r.seccion, r.detalle, String(r.horas)]);
-                    });
-                } else {
-                    body.push([t.name, '', 'Sin reducciones asignadas', '0']);
-                }
-                body.push(['TOTAL ' + t.name, '', '', String(t.total)]);
-            });
-            if (ex.teachers.length > 1) {
-                body.push(['TOTAL CONJUNTO (' + ex.teachers.length + ' profesores/as)', '', '', String(ex.grandTotal)]);
-            }
-            doc.autoTable({
-                startY: y,
-                head: [['Profesor/a', 'Sección', 'Reducción / Cargo', 'Horas']],
-                body: body,
-                theme: 'grid',
-                styles: { fontSize: 8, cellPadding: 1.6 },
-                headStyles: { fillColor: [112, 72, 232], textColor: 255 },
-                margin: { left: margin, right: margin },
-                columnStyles: { 0: { cellWidth: 48 }, 1: { cellWidth: 42 }, 3: { halign: 'center', cellWidth: 16 } },
-                didParseCell: function(hookData) {
-                    var first = String((hookData.row.raw && hookData.row.raw[0]) || '');
-                    if (first.indexOf('TOTAL') === 0) {
-                        hookData.cell.styles.fontStyle = 'bold';
-                        hookData.cell.styles.fillColor = [241, 243, 245];
-                    }
-                }
-            });
-        }
-        doc.save('consulta_reducciones_' + consultaExportStamp() + '.pdf');
-        showNotification('Consulta exportada a PDF', 'success');
     }
 
     function refreshConsultaDatalist() {
@@ -7531,28 +6485,15 @@
     // =============================================
     // EXPORT / IMPORT / RESET / PRINT
     // =============================================
-    // Objeto de exportación LIMPIO: solo las claves del modelo vigente, en copia
-    // profunda. Así ningún residuo del formato antiguo (p. ej. las áreas
-    // 'artistico'/'tecnologico'/'socio' con el departamento de Música, que ya no
-    // existe en el curso vigente) puede colarse en el JSON ni reimportarse.
-    function buildExportObject() {
-        var MODEL_KEYS = ['profesorado', 'dcd', 'orientacion', 'otrosDptos', 'otrasReducciones', 'funciones', 'deletedDefaults'];
-        var cleanData = {};
-        MODEL_KEYS.forEach(function(k) {
-            var v = (data && data[k] !== undefined) ? data[k] : null;
-            cleanData[k] = v === null ? [] : JSON.parse(JSON.stringify(v));
-        });
-        return {
-            equipoDirectivo: JSON.parse(JSON.stringify(equipoDirectivo || {})),
-            data: cleanData,
+    function exportData() {
+        const exportObj = {
+            equipoDirectivo: equipoDirectivo,
+            data: data,
             course: currentCourse,
             version: "2.0",
             exportDate: new Date().toISOString()
         };
-    }
-
-    function exportData() {
-        const dataStr = JSON.stringify(buildExportObject(), null, 2);
+        const dataStr = JSON.stringify(exportObj, null, 2);
         const blob = new Blob([dataStr], { type: 'application/json' });
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
@@ -7812,61 +6753,16 @@
                     if (p.reduccion) otrosH += (parseInt(p.horas, 10) || 0);
                 });
             });
-            // Req. usuario: TDE/Escuela 4.0 se reconocen por NOMBRE de tarjeta
-            // (no solo por cat 'ed'): las creadas a mano nacen con cat 'pdc'.
             var otrH = 0;
-            var edH = 0;
             (data.otrasReducciones || []).forEach(function(r) {
-                var h = parseInt(r.horas, 10) || 0;
-                if (isEnsenanzaDigitalCard(r)) edH += h;
-                else otrH += h;
+                if (r.cat !== 'ed') otrH += (parseInt(r.horas, 10) || 0);
             });
             var pdcH = dcdH + oriH + otrosH + otrH;
-            var total = dirH + pdcH + edH;
-
-            // Tabla de validación de los criterios numéricos (espejo de la
-            // pantalla "Resumen general"): usa la misma fuente de datos que
-            // la app (computeResumenData), no el filtro soloActivos.
-            var rv = computeResumenData();
-            var critRows = [
-                ['Equipo directivo = 24 h', rv.directivo + ' h', rv.directivo === 24 ? 'CUMPLE' : 'NO CUMPLE'],
-                ['DD (departamentos didácticos) = 16 h', rv.dcd + ' h', rv.dcd === 16 ? 'CUMPLE' : 'NO CUMPLE'],
-                ['OD (otros departamentos) = 9 h', rv.otros + ' h', rv.otros === 9 ? 'CUMPLE' : 'NO CUMPLE'],
-                ['DD + OD = 25 h', (rv.dcd + rv.otros) + ' h', (rv.dcd + rv.otros) === 25 ? 'CUMPLE' : 'NO CUMPLE'],
-                ['TDE + Escuela 4.0 = 5 h', rv.ed + ' h', rv.ed === 5 ? 'CUMPLE' : 'NO CUMPLE'],
-                ['OR (asignadas, sin TDE) máx. 11 h', rv.or + ' h', rv.or <= 11 ? 'CUMPLE' : 'NO CUMPLE']
-            ];
-            if (rv.or < 11) {
-                critRows.push(['OR + DD + OD + TDE (serán 39 h con OR = 11)', rv.conjunto + ' h', 'PENDIENTE']);
-                critRows.push(['Quedan ' + (11 - rv.or) + ' h de reducción sin asignar', (11 - rv.or) + ' h', 'PENDIENTE']);
-            } else {
-                critRows.push(['OR + DD + OD + TDE = 39 h', rv.conjunto + ' h', rv.conjunto === 39 ? 'CUMPLE' : 'NO CUMPLE']);
-            }
-            checkNewPage(30);
-            doc.setFontSize(10);
-            doc.setFont(undefined, 'bold');
-            doc.text('Criterios numéricos (validación)', margin, y);
-            y += 3;
-            doc.autoTable({
-                startY: y,
-                head: [['Condición', 'Valor', 'Estado']],
-                body: critRows,
-                theme: 'grid',
-                styles: { fontSize: 8, cellPadding: 2 },
-                headStyles: { fillColor: [44, 62, 80], textColor: 255 },
-                margin: { left: margin, right: margin },
-                columnStyles: { 1: { halign: 'center', cellWidth: 25 }, 2: { halign: 'center', cellWidth: 30 } },
-                didParseCell: function(hd) {
-                    if (hd.section === 'body' && hd.column.index === 2) {
-                        var val = String(hd.cell.raw);
-                        if (val === 'CUMPLE') hd.cell.styles.textColor = [43, 138, 62];
-                        else if (val === 'NO CUMPLE') hd.cell.styles.textColor = [201, 42, 42];
-                        else hd.cell.styles.textColor = [230, 119, 0];
-                    }
-                }
+            var edH = 0;
+            (data.otrasReducciones || []).forEach(function(r) {
+                if (r.cat === 'ed') edH += (parseInt(r.horas, 10) || 0);
             });
-            y = doc.lastAutoTable.finalY + 6;
-
+            var total = dirH + pdcH + edH;
             doc.autoTable({
                 startY: y,
                 head: [['Concepto', 'Horas']],
@@ -8358,9 +7254,10 @@
             document.getElementById('dashboardView').style.display = 'none';
             document.getElementById('resumenScreen').style.display = 'block';
             calculateResumenGeneral();
-            // Consulta personal: refresca el desplegable y re-renderiza la selección pendiente
+            // Consulta personal: refresca el desplegable y re-renderiza la consulta pendiente
             refreshConsultaDatalist();
-            renderConsultaProf();
+            var cpi = document.getElementById('consultaProfInput');
+            if (cpi) renderConsultaProf(cpi.value);
             window.scrollTo(0, 0);
         }
         function showDashboard() {
@@ -8371,87 +7268,22 @@
         document.getElementById('openResumenBtn').addEventListener('click', showResumenScreen);
         document.getElementById('resumenBackBtn').addEventListener('click', showDashboard);
 
-        // ===== Barra de estado del Resumen: incidencias navegables =====
-        // Cada chip de incidencia lleva a la sección del dashboard donde se
-        // corrige (vuelve a la pantalla principal, desplaza hasta la sección
-        // y la resalta unos segundos).
-        function goToSection(sectionId) {
-            showDashboard();
-            setTimeout(function() {
-                var el = document.getElementById(sectionId);
-                if (!el) return;
-                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                el.classList.remove('section-flash');
-                void el.offsetWidth; // fuerza reinicio de la animación si ya estaba
-                el.classList.add('section-flash');
-                setTimeout(function() { el.classList.remove('section-flash'); }, 2000);
-            }, 80);
-        }
-        document.getElementById('criteriosStatusList').addEventListener('click', function(e) {
-            var chip = e.target.closest('[data-section]');
-            if (!chip) return;
-            goToSection(chip.dataset.section);
-        });
-
-        // Copiar el resumen completo al portapapeles (correo / mensajería)
-        document.getElementById('copiarResumenBtn').addEventListener('click', copiarResumenAlPortapapeles);
-
-        // ===== Consulta personal de reducciones por profesor (multi-selección) =====
+        // ===== Consulta personal de reducciones por profesor =====
         var consultaProfInput = document.getElementById('consultaProfInput');
-        function consultaAddFromInput() {
-            var v = consultaProfInput.value;
-            if (!String(v).trim()) return;
-            if (addTeacherToSelection(v)) {
-                consultaProfInput.value = '';
-                renderConsultaProf();
-            }
-        }
-        document.getElementById('consultaProfBtn').addEventListener('click', consultaAddFromInput);
-        // Al elegir una opción exacta del desplegable (o teclear un nombre
-        // completo que coincida) se añade directamente a la consulta.
+        document.getElementById('consultaProfBtn').addEventListener('click', function() {
+            renderConsultaProf(consultaProfInput.value);
+        });
         consultaProfInput.addEventListener('change', function() {
-            var v = this.value;
-            if (String(v).trim() && getAllTeachers().indexOf(v) !== -1) {
-                consultaAddFromInput();
-            }
+            renderConsultaProf(consultaProfInput.value);
+        });
+        consultaProfInput.addEventListener('input', function() {
+            // En vivo solo limpia el resultado al borrar (para no dar "sin resultados"
+            // mientras el usuario teclea un nombre todavía incompleto)
+            if (!this.value.trim()) renderConsultaProf('');
         });
         consultaProfInput.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                consultaAddFromInput();
-            }
+            if (e.key === 'Enter') renderConsultaProf(consultaProfInput.value);
         });
-        // Todos los profesores/as que tengan ALGUNA reducción asignada
-        document.getElementById('consultaProfAllBtn').addEventListener('click', function() {
-            var withReds = getTeachersWithReductions();
-            if (!withReds.length) {
-                showNotification('No hay profesorado con reducciones asignadas en este curso', 'info');
-                return;
-            }
-            consultaSelection = withReds.slice();
-            renderConsultaProf();
-            showNotification('Consulta ampliada a ' + withReds.length + ' profesores/as con reducciones', 'success');
-        });
-        document.getElementById('consultaProfClearBtn').addEventListener('click', function() {
-            consultaSelection = [];
-            renderConsultaProf();
-        });
-        // Todos los profesores/as que NO tengan NINGUNA reducción asignada
-        document.getElementById('consultaProfNoneBtn').addEventListener('click', function() {
-            var withoutReds = getTeachersWithoutReductions();
-            if (!withoutReds.length) {
-                showNotification('Todo el profesorado registrado tiene alguna reducción asignada', 'info');
-                return;
-            }
-            consultaSelection = withoutReds.slice();
-            renderConsultaProf();
-            showNotification('Consulta: ' + withoutReds.length + (withoutReds.length === 1 ? ' profesor/a sin ninguna reducción' : ' profesores/as sin ninguna reducción'), 'success');
-        });
-
-        // ===== Exportación de la consulta a PDF / CSV / Excel =====
-        document.getElementById('consultaExportPdfBtn').addEventListener('click', exportConsultaPDF);
-        document.getElementById('consultaExportCsvBtn').addEventListener('click', exportConsultaCSV);
-        document.getElementById('consultaExportXlsBtn').addEventListener('click', exportConsultaExcel);
 
         // Report modal (PDF)
         document.getElementById('reportBtn').addEventListener('click', function() {
