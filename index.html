@@ -5093,7 +5093,14 @@
         if (isAdmin) html += '<th></th>';
         html += '</tr></thead><tbody>';
 
-        dep.professors.forEach(function(prof, index) {
+        // Listado ALFABÉTICO (req. usuario): se recorren los profesores en
+        // orden de nombre pero cada fila conserva su ÍNDICE ORIGINAL en el
+        // modelo (data-index), de modo que todos los handlers (editar nombre,
+        // activo, JD, horas, eliminar) siguen apuntando a la fila correcta.
+        var dcdRowOrder = dep.professors.map(function(p, i) { return i; })
+            .sort(function(a, b) { return cmpNames(dep.professors[a].name, dep.professors[b].name) || (a - b); });
+        dcdRowOrder.forEach(function(index) {
+            var prof = dep.professors[index];
             const isActive = prof.active !== false;
             const hours = prof.jd ? 2 : 0;
             const nameDisabled = !isAdmin ? ' disabled' : '';
@@ -5159,7 +5166,12 @@
         if (isAdmin) html += '<th></th>';
         html += '</tr></thead><tbody>';
 
-        data.orientacion.forEach(function(prof, index) {
+        // Listado ALFABÉTICO (req. usuario), mismo criterio que DCD: orden de
+        // nombre en pantalla + índice original del modelo en data-orientacion-index.
+        var oriRowOrder = data.orientacion.map(function(p, i) { return i; })
+            .sort(function(a, b) { return cmpNames(data.orientacion[a].name, data.orientacion[b].name) || (a - b); });
+        oriRowOrder.forEach(function(index) {
+            var prof = data.orientacion[index];
             const isActive = prof.active !== false;
             const hours = prof.jd ? 2 : 0;
             const nameDisabled = !isAdmin ? ' disabled' : '';
@@ -5314,7 +5326,12 @@
                 if (!profs.length) {
                     html += '<tr><td colspan="3" class="fprof-empty-cell">Ningún profesor asignado todavía</td></tr>';
                 } else {
-                    profs.forEach(function(pName, pIdx) {
+                    // Profesores de la función en orden ALFABÉTICO (req. usuario);
+                    // cada fila conserva el índice original dentro de r.profesores.
+                    var fprofOrder = profs.map(function(n, i) { return i; })
+                        .sort(function(a, b) { return cmpNames(profs[a], profs[b]) || (a - b); });
+                    fprofOrder.forEach(function(pIdx) {
+                        var pName = profs[pIdx];
                         html += '<tr>';
                         html += '<td class="cell-keep"><div class="otras-name-picker has-value" data-fprof-pick="' + escapeAttr(r.id) + '||' + pIdx + '"' + disabled + '><span class="picker-label">' + escapeHtml(pName) + '</span><i class="fas fa-chevron-down picker-icon"></i></div></td>';
                         html += '<td class="hours-input-cell cell-keep-fixed"><span class="fprof-horas">1 h</span></td>';
@@ -5422,7 +5439,12 @@
             }
             html += '</div>';
             html += '<div class="profesorado-list-container">';
-            teachers.forEach(function(name, idx) {
+            // Listado ALFABÉTICO de la plantilla (req. usuario); cada item
+            // conserva el índice original para editar/eliminar la fila correcta.
+            var profOrder = teachers.map(function(n, i) { return i; })
+                .sort(function(a, b) { return cmpNames(teachers[a], teachers[b]) || (a - b); });
+            profOrder.forEach(function(idx) {
+                var name = teachers[idx];
                 html += '<div class="profesorado-item">';
                 html += '<input type="text" data-teacher-edit="' + idx + '" value="' + escapeAttr(name) + '"' + (isAdmin ? '' : ' disabled') + '>';
                 if (isAdmin) {
@@ -6715,9 +6737,21 @@
     // PROFESORADO HELPERS
     // =============================================
     // Global teacher list (sorted alphabetically for pickers)
+    // Orden alfabético español para TODOS los listados de profesorado de la
+    // aplicación (req. usuario). Los nombres vacíos (filas recién creadas y
+    // aún sin rellenar) van SIEMPRE al final del listado.
+    function cmpNames(a, b) {
+        var na = String(a || '').trim();
+        var nb = String(b || '').trim();
+        if (!na && !nb) return 0;
+        if (!na) return 1;
+        if (!nb) return -1;
+        return na.localeCompare(nb, 'es');
+    }
+
     function getAllTeachers() {
         var list = (data && Array.isArray(data.profesorado)) ? data.profesorado.slice() : [];
-        return list.sort(function(a, b) { return a.localeCompare(b, 'es'); });
+        return list.sort(cmpNames);
     }
 
     // Generic teacher picker modal (equipo directivo, puestos, otras reducciones)
@@ -6726,9 +6760,12 @@
         var select = document.getElementById('teacherPickerSelect');
         select.innerHTML = '<option value="">— Sin asignar —</option>';
         var teachers = getAllTeachers();
-        // Always include the current value even if not in the profesorado list
+        // Always include the current value even if not in the profesorado list.
+        // Se inserta en su posición ALFABÉTICA (no al principio) para que el
+        // listado del picker siga ordenado.
         if (currentName && String(currentName).trim() && teachers.indexOf(currentName) === -1) {
-            teachers.unshift(String(currentName).trim());
+            teachers.push(String(currentName).trim());
+            teachers.sort(cmpNames);
         }
         teachers.forEach(function(name) {
             var opt = document.createElement('option');
@@ -7208,6 +7245,9 @@
             return false;
         }
         consultaSelection.push(name);
+        // La selección también se mantiene alfabética: los chips y el detalle
+        // de la consulta aparecen siempre en orden (req. usuario).
+        consultaSelection.sort(function(a, b) { return cmpNames(a, b); });
         return true;
     }
 
@@ -7231,6 +7271,8 @@
             var total = rows.reduce(function(a, r) { return a + (r.horas || 0); }, 0);
             return { name: name, rows: rows, total: total };
         });
+        // Resultados SIEMPRE en orden alfabético (pantalla + las 3 exportaciones)
+        teachers.sort(function(a, b) { return cmpNames(a.name, b.name); });
         var grandTotal = teachers.reduce(function(a, t) { return a + t.total; }, 0);
         var noneMode = teachers.length > 0 && teachers.every(function(t) { return !t.rows.length; });
         return { teachers: teachers, grandTotal: grandTotal, noneMode: noneMode };
